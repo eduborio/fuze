@@ -1,0 +1,6 @@
+.table-bordered tbody td {
+	font-size: 14px !important;
+	font-weight: 850;
+    text-transform: none !important;
+    color: #000000 !important;
+}
