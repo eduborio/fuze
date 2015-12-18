@@ -1,0 +1,132 @@
+	#header {
+		height: 55px;
+		z-index: 15;
+	}
+	
+	#site-logo {
+		top: 2px; 
+	}
+	
+	body {
+  		font: 11px/1.7em "Open Sans", "trebuchet ms", arial, sans-serif;
+	}
+	
+	#search {
+		height: 40px;
+	}
+	
+	#content {
+		margin-left: 20px;
+	}
+	
+	#sidebar {
+		width: 20px;
+	}
+	
+	#main-nav .sub-nav {
+		padding-left: 18px;
+	}
+
+	#main-nav .sub-nav > li > a:hover {
+		border-top-right-radius: 3px;
+		border-top-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		border-bottom-left-radius: 3px;
+	}
+
+	#main-nav > li.dropdown > a .caret {
+		position: absolute;
+		top: 13px;
+		right: 14px;
+	}
+
+	#main-nav > li > a i {
+		width: 11px;
+		color: #075258;
+	}
+	
+	.btn.btn-app {
+		width: 67px;
+		font-size: 12px;
+		border-radius: 8px;
+		padding: 8px 0 5px;
+		margin: 1px;
+		line-height: 1.5;
+	}
+	
+	#main-nav > li > a {
+		font-size: 11px;
+		padding: 8px 12px 8px 12px;
+	}
+	
+	#main-nav .sub-nav > li > a {
+		font-size: 11px;
+		padding: 4px 10px 4px 10px;
+	}
+	
+	#content-header {
+		top: -64px;
+		height: 64px;
+		border-top-right-radius: 3px;
+		border-top-left-radius: 3px;
+	}
+	
+	#content-header h1 {
+	  position: relative;
+	  left: 15px;
+	  margin: 0;
+	  color: #444;
+	  font-size: 24px;
+	  font-weight: 400;
+	  line-height: 64px;
+	  letter-spacing: -2px;
+	  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+	}
+	
+	#content-container {
+		position: relative;
+		top: -64px;
+		padding: 0 20px;
+	}
+	
+	#content-container .row {
+		margin-bottom: 0.9em;
+	}
+	
+	.form-control {
+		height: 28px;
+		padding: 4px 8px;
+		font-size: 12px;
+		line-height: 1.428571429;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+	}
+	
+	.select2-container .select2-choice {
+	  height: 28px;
+	  line-height: 28px;
+	  font-size: 12px;
+	  -webkit-border-radius: 3px;
+	  -moz-border-radius: 3px;
+	  border-radius: 3px;
+	  border-color: #ccc;
+	  background: #fff !important;
+	  filter: none;
+	  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	}
+	
+	.portlet .portlet-header h1, .portlet .portlet-header h2, .portlet .portlet-header h3, .portlet .portlet-header h4, .portlet .portlet-header h5, .portlet .portlet-header h6 {
+		padding: 7px 0;
+		font-size: 10px;
+	}
+	
+	.pagination>li>a, .pagination>li>span {
+		padding: 4px 8px;
+	}
+	
+	h3, .h3 {
+		font-size: 16px;
+	}
+	h4, .h4 {
+		font-size: 12px;
+	}

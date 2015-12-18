@@ -38,6 +38,7 @@ public class Usuario implements Autorizavel {
 	@Transient
 	private String confirmacao;
 	
+	
 
 	@Override
 	public UserRole getRole() {

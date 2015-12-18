@@ -19,7 +19,7 @@
 }
 
 #content {
-  background: #fff;
+  background: #f0f0f0;
   width: auto;
   min-height: 800px;
   z-index: 18;
@@ -68,4 +68,3 @@
 		top: -64px;
 		padding: 20px 20px;
 	}
-

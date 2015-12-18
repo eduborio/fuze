@@ -1,0 +1,8 @@
+create table fuze.socios(
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(65) NOT NULL,
+  rg VARCHAR(45) DEFAULT NULL,
+  cpf VARCHAR(45) DEFAULT NULL,
+  email VARCHAR(45) DEFAULT NULL,
+  primary key (id)
+)ENGINE=InnoDB CHARSET=latin1;

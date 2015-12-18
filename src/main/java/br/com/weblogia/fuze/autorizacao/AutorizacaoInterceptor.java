@@ -9,13 +9,14 @@ import org.slf4j.LoggerFactory;
 
 import br.com.caelum.vraptor.Accepts;
 import br.com.caelum.vraptor.AroundCall;
+import br.com.caelum.vraptor.Intercepts;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.controller.ControllerMethod;
 import br.com.caelum.vraptor.interceptor.SimpleInterceptorStack;
 import br.com.weblogia.fuze.anotacoes.NaoPrecisaAutorizacao;
 
 
-//@Intercepts
+@Intercepts
 @RequestScoped
 public class AutorizacaoInterceptor {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AutorizacaoInterceptor.class);

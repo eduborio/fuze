@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orcamento" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0abf6e64-c2f8-4085-8a4f-bd4a0f5e6f35">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="624"/>
+	<parameter name="CAMINHO_LOGO" class="java.lang.String"/>
+	<field name="agencia" class="java.lang.String"/>
+	<field name="data" class="java.util.Date"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="socio" class="java.lang.String"/>
+	<field name="job" class="java.lang.String"/>
+	<field name="midias" class="java.lang.String"/>
+	<field name="periodo" class="java.lang.String"/>
+	<field name="ac" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="socio_nome" class="java.lang.String"/>
+	<field name="socio_email" class="java.lang.String"/>
+	<field name="socio_telefone" class="java.lang.String"/>
+	<field name="praca" class="java.lang.String"/>
+	<field name="pedido" class="java.lang.String"/>
+	<field name="prazo" class="java.lang.String"/>
+	<field name="valor" class="java.lang.Double"/>
+	<pageHeader>
+		<band height="677" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="208" y="124" width="73" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Período de Uso:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="208" y="148" width="73" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[A/C:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="208" y="172" width="73" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Job:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="382" y="124" width="50" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Orçamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="382" y="148" width="50" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="382" y="172" width="50" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Contato:]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Top" isUsingCache="true" onErrorType="Blank">
+				<reportElement uuid="f9a0c015-0f8d-4a51-b9b0-d2e9e66128b7" x="23" y="42" width="120" height="65"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="396" y="46" width="140" height="10"/>
+				<textElement>
+					<font fontName="Uni Sans Regular" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[contato@fuzeimage.com.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="396" y="61" width="140" height="10"/>
+				<textElement>
+					<font fontName="Uni Sans Regular" size="10"/>
+				</textElement>
+				<text><![CDATA[www.fuzeimage.com.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="28" y="124" width="44" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Agência:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="73" y="124" width="128" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{agencia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="28" y="148" width="44" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="73" y="148" width="100" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="28" y="172" width="44" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Midias:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="74" y="172" width="100" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{midias}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="28" y="196" width="44" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Praça:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="74" y="196" width="100" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{praca}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="28" y="599" width="87" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prazo de execução:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="28" y="625" width="140" height="10" forecolor="#666666"/>
+				<textElement>
+					<font fontName="Uni Sans Regular" size="10"/>
+				</textElement>
+				<text><![CDATA[Orçamento válido por 30 dias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fee6258-bcfc-428b-89ae-9dd73bfbf84d" x="340" y="599" width="87" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="282" y="124" width="86" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="282" y="148" width="86" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ac}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="282" y="172" width="86" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{job}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="442" y="124" width="67" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="442" y="148" width="94" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="442" y="172" width="94" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{socio_nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="442" y="196" width="94" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{socio_email}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="442" y="220" width="94" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{socio_telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2dfbe554-45c7-407f-a6ea-8f430f892946" x="28" y="273" width="508" height="39" forecolor="#666666"/>
+				<textElement>
+					<font fontName="Uni Sans Regular" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pedido}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="115" y="599" width="100" height="20" forecolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prazo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="436" y="599" width="100" height="20" forecolor="#666666"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="27" splitType="Stretch"/>
+	</detail>
+</jasperReport>

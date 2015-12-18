@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>VRaptor Blank Project</title>
+<title>Fuze</title>
 <link href="<c:url value='/resources/canvas-theme/css/botoes.css'/>"  rel="stylesheet" />
 <link href="<c:url value='/resources/canvas-theme/css/custom.css'/>"    rel="stylesheet" />
 </head>
@@ -24,16 +24,16 @@
 					
 					<hr>
 				
-					<a class="btn btn-app btn-inverse" href="<c:url value='/notasFiscais/list'/>">
-						<i class="fa fa-print block"></i> NFe
+					<a class="btn btn-app btn-inverse" href="<c:url value='/agencias/list'/>">
+						<i class="fa fa-print block"></i> Agencias
 					</a>
 					
-					<a class="btn btn-app btn-inverse" href="<c:url value='/notasFiscais/impressaoEmLote'/>">
-						<i class="fa fa-print block"></i> em Lote
+					<a class="btn btn-app btn-inverse" href="<c:url value='/clientes/list'/>">
+						<i class="fa fa-print block"></i> Clientes
 					</a>
 					
-					<a class="btn btn-app btn-inverse" href="<c:url value='/notasFiscais/eventos'/>">
-						<i class="fa fa-comments block"></i> Eventos
+					<a class="btn btn-app btn-inverse" href="<c:url value='/orcamentos/list'/>">
+						<i class="fa fa-comments block"></i> Orçamentos
 					</a>
 				</div>	
 			</div>

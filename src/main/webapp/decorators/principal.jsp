@@ -3,18 +3,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>principal</title>
+<title>Fuze</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,800italic,400,600,800" type="text/css">
-    <link href="<c:url value='/resources/canvas-theme/css/font-awesome.min.css'/>" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="<c:url value='/resources/canvas-theme/css/bootstrap.min.css'/>"    rel="stylesheet" />
-    <link href="<c:url value='/resources/canvas-theme/js/libs/css/ui-lightness/jquery-ui-1.9.2.custom.min.css'/>"    rel="stylesheet" />
-    <link href="<c:url value='/resources/canvas-theme/js/plugins/select2/select2.css'/>"    rel="stylesheet" />
-    <link href="<c:url value='/resources/canvas-theme/css/App.css'/>"    rel="stylesheet" />
-	<link href="<c:url value='/resources/canvas-theme/css/custom.css'/>"    rel="stylesheet" />
-	<link href="<c:url value='/resources/canvas-theme/css/sem-menu-lateral.css'/>"    rel="stylesheet" />
-	<link href="<c:url value='/resources/canvas-theme/css/howl.css'/>"    rel="stylesheet" />
+    <link href="<c:url value='/resources/canvas-theme/js/plugins/select2/css/select2.css'/>"    rel="stylesheet" />
+    <link href="<c:url value='/resources/canvas-theme/css/App-1.0.0.css'/>"    rel="stylesheet" media="all" />
+    <link href="<c:url value='/resources/canvas-theme/css/app-btn.css'/>"    rel="stylesheet" media="all"/>
+    <link href="<c:url value='/resources/canvas-theme/css/portlet-1.0.0.css'/>"    rel="stylesheet" media="all"/>
+    <link href="<c:url value='/resources/canvas-theme/css/ajustes-baixa-resolucao-1.0.0.css'/>"    rel="stylesheet"  media="all"/>
+    <link href="<c:url value='/resources/canvas-theme/css/sem-menu-lateral.css'/>"    rel="stylesheet"  media="all"/>
     
     <decorator:head/>
 </head>
@@ -24,7 +24,7 @@
 		<header id="header">
 
 			<h1 id="site-logo">
-				<a href="<c:url value='/' />"><img width="91x" height="46px" src="<c:url value='/resources/imagens/weblogia-logo-pequeno.png'/>" /></a>  
+				<a href="<c:url value='/' />"><img width="182x" height="92px" src="<c:url value='/resources/imagens/logo.png'/>" /></a>  
 			</h1>	
 	
 			<a href="javascript:;" data-toggle="collapse" data-target=".top-bar-collapse" id="top-bar-toggle" class="navbar-toggle collapsed">
@@ -55,22 +55,23 @@
 					<ul class="dropdown-menu" role="menu">
 				        <li><a href="<c:url value='/roles/list'/>"><i class="fa fa-tasks"></i>&nbsp; &nbsp;Perfis de Usuário</a></li>
 				        <li><a href="<c:url value='/usuarios/list'/>"><i class="fa fa-user"></i>&nbsp; &nbsp;Usuários</a></li>
+				        <li><a href="<c:url value='/agencias/list'/>"><i class="fa fa-user"></i>&nbsp; &nbsp;Agências</a></li>
+				        <li><a href="<c:url value='/clientes/list'/>"><i class="fa fa-user"></i>&nbsp; &nbsp;Clientes</a></li>
+				        <li><a href="<c:url value='/socios/list'/>"><i class="fa fa-user"></i>&nbsp; &nbsp;Sócios</a></li>
+				        <li><a href="<c:url value='/pracas/list'/>"><i class="fa fa-user"></i>&nbsp; &nbsp;Praças</a></li>
+				        <li><a href="<c:url value='/contatos/list'/>"><i class="fa fa-user"></i>&nbsp; &nbsp;Contatos</a></li>
+				        <li><a href="<c:url value='/midias/list'/>"><i class="fa fa-user"></i>&nbsp; &nbsp;Midias</a></li>
+				        <li><a href="<c:url value='/config/1'/>"><i class="fa fa-user"></i>&nbsp; &nbsp;Configurações</a></li>
 					</ul>
 				</li>
 			    
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript(0);">
-				    	Notas Fiscais <span class="caret"></span>
+				    	Lançamentos <span class="caret"></span>
 					</a>
 			
 					<ul class="dropdown-menu" role="menu">
-				        <li><a href="<c:url value='/notasFiscais/list'/>"><i class="fa fa-print"></i>&nbsp; &nbsp;Autorizadas</a></li>
-				        <li><a href="<c:url value='/notasFiscais/impressaoEmLote'/>"><i class="fa fa-print"></i>&nbsp; &nbsp;Impressão Em Lote</a></li>
-				        <li class="divider"></li>
-				        <li><a href="<c:url value='/notasFiscais/eventos'/>"><i class="fa fa-tasks"></i>&nbsp; &nbsp;Eventos</a></li>
-				        <li class="divider"></li>
-				        <li><a href="<c:url value='/notasFiscais/consultaStatusDoServico'/>"><i class="fa fa-cog"></i>&nbsp; &nbsp;Consulta Serviço</a></li>
-				        <li><a href="<c:url value='/notasFiscais/inutilizacao'/>"><i class="fa fa-ban"></i>&nbsp; &nbsp;Inutiliza Numeração</a></li>
+				        <li><a href="<c:url value='/orcamentos/list'/>"><i class="fa fa-print"></i>&nbsp; &nbsp;Orçamentos</a></li>
 					</ul>
 				</li>
 			    

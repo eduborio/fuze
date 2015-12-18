@@ -20,7 +20,7 @@
 
 	<div>
 		<a href=";">
-			<img width="350px" height="185px" src="<c:url value='/resources/imagens/weblogia-logo.png'/>" alt="Logo" />
+			<img width="350px" height="185px" src="<c:url value='/resources/imagens/logo.png'/>" alt="Logo" />
 		</a>
 	</div>
 
@@ -28,7 +28,7 @@
 
 		<h3>Bem vindo ao Fuze Orçamentos</h3>
 
-		<h5>Entre com usuario e senha para acessar.</h5>
+		<h5>Entre com usuario e senha.</h5>
 
 		<form method="POST" id="login-form" action="<c:url value='/login/logar'/>" class="form">
 		

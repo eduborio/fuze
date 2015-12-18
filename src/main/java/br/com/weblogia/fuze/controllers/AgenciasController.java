@@ -1,5 +1,7 @@
 package br.com.weblogia.fuze.controllers;
 
+import static br.com.caelum.vraptor.view.Results.json;
+
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
@@ -44,6 +46,19 @@ public class AgenciasController {
 		}
 		
 		result.redirectTo("list");
+	}
+	
+	@Post
+	@Transactional
+	public void salvarPeloNome(String nome){
+				
+		Agencia agencia = new Agencia();
+		agencia.setNome(nome);
+		agencias.salva(agencia);
+		
+		result.use(json()).withoutRoot().
+		from(agencia).excludeAll().include("id","nome").
+		serialize();
 	}
 
 }

@@ -8,6 +8,8 @@ import br.com.caelum.vraptor.Result;
 import br.com.weblogia.fuze.anotacoes.NaoPrecisaAutorizacao;
 import br.com.weblogia.fuze.autorizacao.UserRole;
 import br.com.weblogia.fuze.autorizacao.Usuario;
+import br.com.weblogia.fuze.domain.Configuracoes;
+import br.com.weblogia.fuze.repositorios.ConfiguracoesRepositorio;
 import br.com.weblogia.fuze.repositorios.UsuarioRepositorio;
 
 @Controller
@@ -21,6 +23,8 @@ public class LoginController {
 	
 	private @Inject UsuarioRepositorio usuarios; 
 	
+	private @Inject ConfiguracoesRepositorio cfg; 
+	
 	public void login(){
 		
 	}
@@ -28,7 +32,16 @@ public class LoginController {
 	@Post
 	public void logar(String login, String senha){
 		
-		if(login.equals("admin") && senha.equals("du19216878")){
+		Configuracoes config = null;
+		if(cfg.buscaPorId(1L) == null){
+			config =  new Configuracoes();
+			config.setNf(11.00);
+			config.setBv(0);
+			config.setDiariaCwb(1600);
+			config.setDiariaSp(0);
+		}
+		
+		if(login.equals("admin") && senha.equals("admin")){
 			UserRole role = new UserRole();
 			role.setNome("SuperUsuario");
 			usuario.setLogado(true);

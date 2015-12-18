@@ -3,20 +3,35 @@
       this.select2({
 		   minimumInputLength: 2,
 		      ajax: {
-		      url: opcoes.url,
-		      dataType: 'json',
-		      type: "GET",
-		      quietMillis: 50,
-		      data: function ( term ) { return { term: term }; },
-		      results: function (data) {
-		    	  return { results : $.map(data, function (item) { return guardaCampos(item,opcoes.selecao,opcoes.extras); } ) };}
+		    	  url: opcoes.url,
+		    	  dataType: 'json',
+		    	  type: "GET",
+		    	  delay: 125,
+		    	  processResults: function (data) {
+		    		  return { 
+		    			  results : $.map(data, function (item) { 
+		    				  return guardaCampos(item,opcoes.selecao,opcoes.extras); 
+		    		  	   })
+		    		  }	   
+		    	  }
 		      },
-		      initSelection: function (element, callback) {
-	           callback({ id: opcoes.editar.id, text: opcoes.editar.texto });
-		      }
-	  }).one('select2-focus', select2Focus).on("select2-blur", function () {
-		   $(this).one('select2-focus', select2Focus);
-		});;
+		      tags: true,
+		      language: "pt-BR"
+		      /*
+		      language: {
+		             noResults: function(ajax) {
+		            	 console.log(ajax.url);
+		                 return "<li>"+term+"&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-success btn-xs' onClick='salvaNovo("+term+")'><i class='fa fa-plus-circle'></i>&nbsp;&nbsp;Adicionar Novo</button></li>";
+		            }
+		     },
+		     escapeMarkup: function (markup) {
+		        return markup;
+		     }
+		      formatNoMatches: function( term ) {
+		    	    return "<li class='select2-no-results'>"+"No results found.<button class='btn btn-success pull-right btn-xs' onClick='alert(coco)'>Add New Item</button></li>";
+		       },*/
+		      
+	  });
       
       return this;
    }; 
@@ -36,6 +51,9 @@ function guardaCampos(item,selecao,extras){
 	var textoDaSelecao = montaStringSelecao(item,selecao);
 	
 	var data = {text : textoDaSelecao,id: item['id']};
+	
+	console.log(data.text)
+	console.log(data.id)
 	
 	if(extras!==undefined){
 		for(propriedade in extras){
@@ -82,3 +100,9 @@ function navegaPeloObjeto(item,propriedade){
 		return item[objects[0]][objects[1]][objects[2]][objects[3]][objects[4]][objects[5]];
 	
 };
+
+function salvaNovo(term){
+	
+	alert(term);
+	
+}

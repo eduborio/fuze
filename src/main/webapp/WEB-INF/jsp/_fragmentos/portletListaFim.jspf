@@ -1,0 +1,10 @@
+	</div> <!-- portlet content -->
+	<div class="row">
+		<div class="col-md-2">
+			Total de ${registros} registros.
+			</div>	
+				<div class="col-md-offset-2 col-md-3 align-right">
+			<ul class="pagination"></ul>
+		</div>
+	</div>
+</div> <!-- portlet-->

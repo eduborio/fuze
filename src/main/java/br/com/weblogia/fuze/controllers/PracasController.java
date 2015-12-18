@@ -1,5 +1,7 @@
 package br.com.weblogia.fuze.controllers;
 
+import static br.com.caelum.vraptor.view.Results.json;
+
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
@@ -44,6 +46,20 @@ public class PracasController {
 		}
 		
 		result.redirectTo("list");
+	}
+	
+	@Post
+	@Transactional
+	public void salvarPeloNome(String nome){
+		
+		Praca praca = new Praca();
+		praca.setDescricao(nome);
+		pracas.salva(praca);
+		
+		result.use(json()).withoutRoot().
+		from(praca).
+		serialize();
+		
 	}
 
 }

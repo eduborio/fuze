@@ -119,6 +119,20 @@
 			<artifactId>poi</artifactId>
 			<version>3.9</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>4.8.0</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>br.com.weblogia</groupId>
+    		<artifactId>unisans</artifactId>
+    		<version>1.0.0</version>
+		</dependency>
+		
+		
   </dependencies>
   <build>
     <finalName>fuze</finalName>

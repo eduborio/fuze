@@ -1,0 +1,10 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:forEach var="error" items="${errors}">
+	<div class="alert alert-danger alert-dismissible fade in">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">×</span>
+		</button>
+		<h3>${error.category}</h3>${error.message}
+	</div>
+</c:forEach>

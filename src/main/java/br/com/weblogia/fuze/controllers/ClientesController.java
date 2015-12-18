@@ -1,5 +1,7 @@
 package br.com.weblogia.fuze.controllers;
 
+import static br.com.caelum.vraptor.view.Results.json;
+
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
@@ -44,6 +46,26 @@ public class ClientesController {
 		}
 		
 		result.redirectTo("list");
+	}
+	
+	@Post
+	@Transactional
+	public void salvarPeloNome(String nome){
+				
+		Cliente cliente = new Cliente();
+		cliente.setNome(nome);
+		clientes.salva(cliente);
+		
+		result.use(json()).withoutRoot().
+		from(cliente).excludeAll().include("id","nome").
+		serialize();
+	}
+	
+	@Path("/clientes/{id}")
+	public void buscaPeloNome(Long id){
+		Cliente cliente = clientes.buscaPorId(id);
+		result.include("cliente",cliente);
+		result.of(this).novo();
 	}
 	
 	

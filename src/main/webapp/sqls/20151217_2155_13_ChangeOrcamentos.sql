@@ -1,0 +1,7 @@
+ALTER TABLE fuze.orcamentos 
+DROP COLUMN ajuste,
+DROP COLUMN temBV,
+DROP COLUMN mostrarRodape,
+DROP COLUMN ac,
+ADD COLUMN empresaRodape TINYINT(1) UNSIGNED NULL DEFAULT 0 AFTER contato_id,
+ADD COLUMN socioRodape TINYINT(1) UNSIGNED NULL DEFAULT 0 AFTER empresaRodape;
