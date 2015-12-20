@@ -58,6 +58,20 @@ public class OrcamentoImpressao {
 		return o.getSocio().getTelefone();
 	}
 	
+	public String getSocio_rg(){
+		if(o.getSocio()==null)
+			return null;
+		
+		return o.getSocio().getRg();
+	}
+	
+	public String getSocio_cpf(){
+		if(o.getSocio()==null)
+			return null;
+		
+		return o.getSocio().getCpf();
+	}
+	
 	public String getJob(){
 		return o.getJob();
 	}
@@ -98,6 +112,14 @@ public class OrcamentoImpressao {
 	
 	public String getCodigo(){
 		return o.getId().toString();
+	}
+	
+	public Boolean getEmpresaRodape(){
+		return o.getEmpresaRodape();
+	}
+	
+	public Boolean getSocioRodape(){
+		return o.getSocioRodape();
 	}
 
 }

@@ -56,8 +56,6 @@
 									</div>
 								</div>
 								
-							
-								
 								<div class="row">
 									<div class="col-md-4">
 										<label>Periodo De Uso</label>
@@ -90,22 +88,80 @@
 										</select>
 									</div>
 									<div class="col-md-4">
-										<label>Mostrar Rodapé</label>
-										<select name="orcamento.mostrarRodape" value="${orcamento.mostrarRodape}" class="form-control">
-											<option value="false" <c:if test="${orcamento.mostrarRodape == false}">selected="selected"</c:if>>Não</option>
-											<option value="true" <c:if test="${orcamento.mostrarRodape == true}">selected="selected"</c:if>>Sim</option>
+										<label>Responsavel no rodapé</label>
+										<select name="orcamento.socioRodape" value="${orcamento.socioRodape}" class="form-control">
+											<option value="false" <c:if test="${orcamento.socioRodape == false}">selected="selected"</c:if>>Não</option>
+											<option value="true" <c:if test="${orcamento.socioRodape == true}">selected="selected"</c:if>>Sim</option>
 										</select>
 									</div>
 								</div>
-								<div class="row">	
+								
+								<div class="row">
 									<div class="col-md-4">
-										<label>Tem BV</label>
-										<select name="orcamento.temBV" value="${orcamento.temBV}" class="form-control">
-											<option value="false" <c:if test="${orcamento.temBV == false}">selected="selected"</c:if>>Não</option>
-											<option value="true" <c:if test="${orcamento.temBV == true}">selected="selected"</c:if>>Sim</option>
+										<label>Empresa no rodapé</label>
+										<select name="orcamento.empresaRodape" value="${orcamento.empresaRodape}" class="form-control">
+											<option value="false" <c:if test="${orcamento.empresaRodape == false}">selected="selected"</c:if>>Não</option>
+											<option value="true" <c:if test="${orcamento.empresaRodape == true}">selected="selected"</c:if>>Sim</option>
 										</select>
 									</div>
+									
 									<div class="col-md-4">
+										<label>Prazo Execução</label>
+										<input type="text" name="orcamento.prazoExecucao" value="${orcamento.prazoExecucao}" class="form-control"/>
+									</div>
+								</div>
+								<%@ include file="../_fragmentos/portletFim.jspf" %>
+								
+								<jsp:include page="../_fragmentos/portlet.jsp"><jsp:param name="iconClass" value="fa fa-tasks"/></jsp:include>
+								
+								<div class="row">
+									<div class="col-md-3"> 
+										<label>Tipo da Diária</label>
+										<select id="tipo" class="form-control" name="orcamento.tipo">
+											<c:forEach items="${tipoList}" var="tipo">
+												<option value="${tipo}" <c:if test="${orcamento.tipo==tipo}">selected="selected"</c:if>>${tipo}</option>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<label>Valor da Diária</label>
+										<input id="val-uni" type="text" class="form-control" name="orcamento.valorDiaria"  value="<fmt:formatNumber value='${orcamento.valorDiaria}' pattern='#,##0.00' />" readonly="readonly"/>
+									</div>
+								</div>		
+								<div class="row">	
+									<div class="col-md-3">
+										<label>Diárias</label>
+										<input type="text" class="form-control" name="orcamento.dias" value="${orcamento.dias}" />
+									</div>
+									<div class="col-md-3">
+										<label>Total das Diárias</label>
+										<input id="tot-dir" type="text" class="form-control"  readonly="readonly"/>
+									</div>
+								</div>
+								
+								<div class="row">	
+									<div class="col-md-3">
+										<label>% BV</label>
+										<input type="text" data-behaviour="valor" class="form-control" name="orcamento.bv" value="<fmt:formatNumber value='${orcamento.bv}' pattern='#,##0.00'/>" />
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-3">
+										<label>Acréscimo %</label>
+									    <input type="text" class="form-control" data-behaviour="valor" name="orcamento.acrescimo" value="<fmt:formatNumber value='${orcamento.acrescimo}' pattern='#,##0.00'/>" />
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-3">
+										<label>Desconto %</label>
+									    <input type="text" class="form-control" data-behaviour="valor" name="orcamento.desconto" value="<fmt:formatNumber value='${orcamento.desconto}' pattern='#,##0.00'/>" />
+									</div>
+								</div>
+								
+								<div class="row">	
+									<div class="col-md-3">
 										<label>Tem NF</label>
 										<select name="orcamento.temNF" value="${orcamento.temNF}" class="form-control">
 											<option value="false" <c:if test="${orcamento.temNF == false}">selected="selected"</c:if>>Não</option>
@@ -115,32 +171,10 @@
 								</div>
 								
 								<div class="row">
-									<div class="col-md-4">
-										<label>Prazo Execução</label>
-										<input type="text" name="orcamento.prazoExecucao" value="${orcamento.prazoExecucao}" class="form-control"/>
-									</div>
-									<div class="col-md-4">
-										<label>Ajuste %</label>
-									    <input type="text" class="form-control" data-behaviour="valor" name="orcamento.ajuste" id="orcamento.ajuste" value="<fmt:formatNumber value='${orcamento.ajuste}' pattern='#,##0.00'/>" />
-									</div>
-								</div>
-								
-								<hr>
-								
-								<div class="row">
 									<div class="col-md-3">
-										<label>Diárias</label>
-										<input type="text" class="form-control" name="orcamento.dias" value="${orcamento.dias}" />
+										<label>Total</label>
+									    <input id="total" type="text" class="form-control" data-behaviour="valor" name="orcamento.valor" value="<fmt:formatNumber value='${orcamento.valor}' pattern='#,##0.00'/>" />
 									</div>
-								
-									<div class="col-md-2"> 
-										<label>Tipo da Diária</label>
-										<select id="tipo" class="form-control" name="orcamento.tipo">
-											<c:forEach items="${tipoList}" var="tipo">
-												<option value="${tipo}" <c:if test="${orcamento.tipo==tipo}">selected="selected"</c:if>>${tipo}</option>
-											</c:forEach>
-										</select>
-									</div>	
 								</div>
 								
 								<%@ include file="../_fragmentos/portletFim.jspf" %>
@@ -161,6 +195,29 @@
 
 									</div>
 								</div>
+
+				<%@ include file="../_fragmentos/portletFim.jspf" %>
+				
+				<jsp:include page="../_fragmentos/portlet.jsp"><jsp:param name="iconClass" value="fa fa-tasks"/></jsp:include>
+				
+				<div class="row">
+					<div class="col-md-12">
+					<h4 class="heading">Imagens</h4>
+						<div class="ui-lightbox-gallery">
+							<c:forEach var="img" items="${orcamento.imgs}">
+								<!--  <a target="_blank" href="<c:url value='/orcamentos/imagens/${orcamento.id}/${img}'/>">${img}</a>-->
+								<a class="" target="_blank" href="<c:url value='/orcamentos/imagens/${orcamento.id}/${img}'/>" title="${img}">
+									<img src="<c:url value='/orcamentos/imagens/${orcamento.id}/${img}'/>" width="125" alt="${img}">
+								</a>	
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<input type="button" value=" + Imagem" class="btn btn-info" onClick="this.form.action='<c:url value='/orcamentos/adicionaImagem'/>';this.form.submit()"/>
+					</div>
+				</div>
 
 				<%@ include file="../_fragmentos/portletFim.jspf" %>
 			</form>

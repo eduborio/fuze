@@ -221,11 +221,25 @@ public class OrcamentosController {
 		params.put("SUBREPORT_DIR",caminho);
 		//params.put("SUBDS",subds);
 		params.put("jrDataSource",ds);
+		params.putAll(preparaImagensDoOracamento(orcamento));
 		
 		return params;
 		
 	}
 	
+	private Map<String,Object> preparaImagensDoOracamento(Orcamento orcamento) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		Integer cont = 0;
+		for(String nomeAqruivo : orcamento.getImgs()){
+			cont++;
+			params.put("IMAGEM"+cont.toString(), nomeAqruivo);
+		}
+		
+		params.put("CAMINHO_IMAGENS", "/home/eduardo/imgs/orcamento/"+orcamento.getId()+"/");
+		
+		return params;
+	}
+
 	@Post
 	@Transactional
 	public void adicionaImagem(Orcamento orcamento){
@@ -245,7 +259,7 @@ public class OrcamentosController {
 		
 		List<String> imagensList = new ArrayList<String>();
 		
-		File folder = new File("/home/eduardo/pdfs/orcamento/" + orcamento.getId());
+		File folder = new File("/home/eduardo/imgs/orcamento/" + orcamento.getId());
 		
 		if(folder.exists()){
 			for(File file : folder.listFiles()){
@@ -261,8 +275,8 @@ public class OrcamentosController {
 	@Path("/orcamentos/imagens/{orcamento.id}/{nomeArquivo}")
 	public Download imagem(Orcamento orcamento,String nomeArquivo) throws FileNotFoundException {
 		
-		File file = new File("/home/eduardo/pdfs/orcamento/" + orcamento.getId(),nomeArquivo);
-	    String contentType = "application/pdf";
+		File file = new File("/home/eduardo/imgs/orcamento/" + orcamento.getId(),nomeArquivo);
+	    String contentType = "image/x-png, image/gif, image/jpeg";
 	    String filename = file.getName();
 	    
 	    File fileDownload = file;
@@ -273,7 +287,7 @@ public class OrcamentosController {
 	
 	private void salva(UploadedFile imagem, Orcamento orcamento) {
 		
-		File folder = new File("/home/eduardo/pdfs/orcamento/"+orcamento.getId());
+		File folder = new File("/home/eduardo/imgs/orcamento/"+orcamento.getId());
 		
 		if(!folder.exists())
 			folder.mkdirs();

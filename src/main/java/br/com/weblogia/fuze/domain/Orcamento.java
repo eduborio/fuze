@@ -1,6 +1,9 @@
 package br.com.weblogia.fuze.domain;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -69,6 +72,27 @@ public class Orcamento {
 	private String status;
 	
 	private Double valor;
+	private Double acrescimo;
+	private Double desconto;
+	
+	public List<String> getImgs(){
+		List<String> pdfs = new ArrayList<String>(); 
+		
+		if(id!=null){
+			File folder = new File("/home/eduardo/imgs/orcamento/" + id);
+			
+			if(folder.exists()){
+				for(File file : folder.listFiles()){
+					pdfs.add(file.getName());
+				}
+			}
+			
+			return pdfs;
+			
+		}
+		
+		return new ArrayList<String>();	
+	}
 	
 	public Long getId() {
 		return id;
@@ -269,5 +293,20 @@ public class Orcamento {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	
+
+	public Double getAcrescimo() {
+		return acrescimo;
+	}
+
+	public void setAcrescimo(Double acrescimo) {
+		this.acrescimo = acrescimo;
+	}
+
+	public Double getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(Double desconto) {
+		this.desconto = desconto;
+	}
 }
