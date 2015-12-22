@@ -118,6 +118,7 @@
 									<div class="col-md-3"> 
 										<label>Tipo da Diária</label>
 										<select id="tipo" class="form-control" name="orcamento.tipo">
+											<option>Selecione</option>
 											<c:forEach items="${tipoList}" var="tipo">
 												<option value="${tipo}" <c:if test="${orcamento.tipo==tipo}">selected="selected"</c:if>>${tipo}</option>
 											</c:forEach>
@@ -125,48 +126,64 @@
 									</div>
 									<div class="col-md-3">
 										<label>Valor da Diária</label>
-										<input id="val-uni" type="text" class="form-control" name="orcamento.valorDiaria"  value="<fmt:formatNumber value='${orcamento.valorDiaria}' pattern='#,##0.00' />" readonly="readonly"/>
+										<input id="val-uni" type="text" class="form-control" name="orcamento.valorDiaria"  value="<fmt:formatNumber value='${orcamento.valorDiaria}' pattern='#,##0.00' />" readonly="readonly" tabindex="-1"/>
 									</div>
 								</div>		
 								<div class="row">	
 									<div class="col-md-3">
 										<label>Diárias</label>
-										<input type="text" class="form-control" name="orcamento.dias" value="${orcamento.dias}" />
+										<input id="quant" type="text" class="form-control" name="orcamento.dias" value="${orcamento.dias}" />
 									</div>
 									<div class="col-md-3">
 										<label>Total das Diárias</label>
-										<input id="tot-dir" type="text" class="form-control"  readonly="readonly"/>
+										<input id="tot-dir" type="text" class="form-control"  readonly="readonly" tabindex="-1"/>
 									</div>
 								</div>
 								
 								<div class="row">	
 									<div class="col-md-3">
 										<label>% BV</label>
-										<input type="text" data-behaviour="valor" class="form-control" name="orcamento.bv" value="<fmt:formatNumber value='${orcamento.bv}' pattern='#,##0.00'/>" />
+										<input id="bv" type="text" data-behaviour="valor" class="form-control" name="orcamento.bv" value="<fmt:formatNumber value='${orcamento.bv}' pattern='#,##0.00'/>" />
+									</div>
+									<div class="col-md-3">
+										<label>Valor BV</label>
+										<input id="tot-bv" type="text" class="form-control"  readonly="readonly" tabindex="-1"/>
 									</div>
 								</div>
 								
 								<div class="row">
 									<div class="col-md-3">
 										<label>Acréscimo %</label>
-									    <input type="text" class="form-control" data-behaviour="valor" name="orcamento.acrescimo" value="<fmt:formatNumber value='${orcamento.acrescimo}' pattern='#,##0.00'/>" />
+									    <input id="ac" type="text" class="form-control" data-behaviour="valor" name="orcamento.acrescimo" value="<fmt:formatNumber value='${orcamento.acrescimo}' pattern='#,##0.00'/>" />
+									</div>
+									<div class="col-md-3">
+										<label>Valor Acréscimo</label>
+										<input id="tot-ac" type="text" class="form-control"  readonly="readonly" tabindex="-1"/>
 									</div>
 								</div>
 								
 								<div class="row">
 									<div class="col-md-3">
 										<label>Desconto %</label>
-									    <input type="text" class="form-control" data-behaviour="valor" name="orcamento.desconto" value="<fmt:formatNumber value='${orcamento.desconto}' pattern='#,##0.00'/>" />
+									    <input id="dc" type="text" class="form-control" data-behaviour="valor" name="orcamento.desconto" value="<fmt:formatNumber value='${orcamento.desconto}' pattern='#,##0.00'/>" />
+									</div>
+									<div class="col-md-3">
+										<label>Valor Desconto</label>
+										<input id="tot-dc" type="text" class="form-control"  readonly="readonly" tabindex="-1"/>
 									</div>
 								</div>
 								
 								<div class="row">	
 									<div class="col-md-3">
 										<label>Tem NF</label>
-										<select name="orcamento.temNF" value="${orcamento.temNF}" class="form-control">
+										<select id="nf" name="orcamento.temNF" value="${orcamento.temNF}" class="form-control">
 											<option value="false" <c:if test="${orcamento.temNF == false}">selected="selected"</c:if>>Não</option>
 											<option value="true" <c:if test="${orcamento.temNF == true}">selected="selected"</c:if>>Sim</option>
 										</select>
+									</div>
+									<div class="col-md-3">
+										<label>Valor NF</label>
+										<input id="tot-nf" type="text" class="form-control"  readonly="readonly" tabindex="-1"/>
 									</div>
 								</div>
 								
@@ -317,9 +334,194 @@
   		    	  }).fail( function( praca ) { alert(praca)});
   	    	}
   	    });
-  
+  	
+  	
+  	$("#tipo").on("change",function (){
+  		
+  		var tipo = $(this).val();
+  		$.post("<c:url value='/config/diaria'/>", { tipo: tipo})
+  		.done(function(valor){
+  			$("#val-uni").val(valor);
+  		});
+  		
+  	});
+  	
+   $("#nf").on("change",function (){
+  		
+  		var temNF = $(this).val();
+  		$.post("<c:url value='/config/temNF'/>", { temNF: temNF})
+  		.done(function(percNF){
+  			calculaDiarias();
+  	  		calculaBV();
+  	  		calculaAC();
+  	  		calculaDC();
+  	  	    var diarias = parseFloat($("#tot-dir").val());
+  		    var bv = parseFloat($("#tot-bv").val());
+  		    var ac = parseFloat($("#tot-ac").val());
+  		    var dc = parseFloat($("#tot-dc").val());
+  		  
+  		  if(isNaN(diarias))
+  			  diarias = 0;
+  		  
+  		  if(isNaN(bv))
+  			  bv = 0;
+  		  
+  		  if(isNaN(ac))
+  			  ac = 0;
+  		  
+  		  if(isNaN(dc))
+  			  dc = 0;
+  		  
+  		  var total = diarias + bv + ac - dc;
+  		  percNF = (percNF/100);
+  		  $("#tot-nf").val(total * percNF);
+  	  	  calculaTotalGeral()
+  		});
+  		
+  	}); 
+  	
+  	$("#quant").on("blur",function (){
+  		calculaDiarias();
+  		calculaTotalGeral()
+  	});
+  	
+  	$("#bv").on("blur",function (){
+  		calculaDiarias();
+  		calculaBV();
+  		calculaTotalGeral()
+  	});
+  	
+  	$("#ac").on("blur",function (){
+  		calculaDiarias();
+  		calculaBV();
+  		calculaAC();
+  		calculaTotalGeral()
+  	});
+  	
+  	$("#dc").on("blur",function (){
+  		calculaDiarias();
+  		calculaBV();
+  		calculaAC();
+  		calculaDC();
+  		calculaTotalGeral()
+  	});
+  	
+  	/*
+  	$("#nf").on("blur",function (){
+  		calculaDiarias();
+  		calculaBV();
+  		calculaAC();
+  		calculaDC();
+  		calculaNF();
+  		calculaTotalGeral()
+  	});*/
   	
  });
+  
+  function calculaTotalGeral(){
+	  var diarias = parseFloat($("#tot-dir").val());
+	  var bv = parseFloat($("#tot-bv").val());
+	  var ac = parseFloat($("#tot-ac").val());
+	  var dc = parseFloat($("#tot-dc").val());
+	  var nf = parseFloat($("#tot-nf").val());
+	  
+	  if(isNaN(diarias))
+		  diarias = 0;
+	  
+	  if(isNaN(bv))
+		  bv = 0;
+	  
+	  if(isNaN(ac))
+		  ac = 0;
+	  
+	  if(isNaN(dc))
+		  dc = 0;
+	  
+	  if(isNaN(nf))
+		  nf = 0;
+	  
+	  var total = (diarias + bv + ac - dc) + nf;
+	  $("#total").val(formata(total,2));
+  }
+  
+  
+  function calculaDiarias(){
+	 var valor = $("#val-uni").val();
+	 var quantidade = $("#quant").val();
+	 var total = valor * quantidade;
+	 $("#tot-dir").val(total);
+  }
+  
+  function calculaBV(){
+	  
+	 var bv = $("#bv").val();
+	 bv = bv.replace(",",".")
+	 bv = parseFloat(bv)
+	 bv = (bv/100);
+	 	 
+	 total = parseFloat($("#tot-dir").val());
+	 if(isNaN(total))
+		 total = 0;
+	 
+	 if( bv > 0)
+		 $("#tot-bv").val(total * bv);
+	 
+  }
+  
+  function calculaAC(){
+	  
+		 var ac = $("#ac").val();
+		 ac = ac.replace(",",".")
+		 ac = parseFloat(ac)
+		 ac = (ac/100);
+		 	 
+		 diarias = parseFloat($("#tot-dir").val());
+		 bv = parseFloat($("#tot-bv").val());
+		 
+		 if(isNaN(diarias))
+			 diarias = 0;
+		 
+		 if(isNaN(bv))
+			 bv = 0;
+		 
+		 var total = diarias + bv;
+		 if( ac > 0)
+			 $("#tot-ac").val(total * ac);
+		 
+  }
+  
+  function calculaDC(){
+		 var dc = $("#dc").val();
+		 dc = dc.replace(",",".")
+		 dc = parseFloat(dc)
+		 dc = (dc/100);
+		 	 
+		 var diarias = parseFloat($("#tot-dir").val());
+		 var bv = parseFloat($("#tot-bv").val());
+		 var ac = parseFloat($("#tot-ac").val());
+		 
+		 if(isNaN(diarias))
+			 diarias = 0;
+		 
+		 if(isNaN(bv))
+			 bv = 0;
+		 
+		 if(isNaN(ac))
+			 ac = 0;
+		 
+		 var total = diarias + bv + ac;
+		 if( dc > 0)
+			 $("#tot-dc").val(total * dc);
+  }
+  
+  function formata(x,casasDecimais) {
+		x = x.toFixed(casasDecimais).toString().replace(".",",");
+	    return x.replace(/\B(?=(\d{casasDecimais})+(?!\d))/g, ".");
+	}
+  
+  
+  
+  
 </script>
 </content>
 </body>

@@ -85,6 +85,12 @@ public class OrcamentosController {
 	@Transactional
 	public void salvar(Orcamento orcamento){
 		
+		salvaOrcamento(orcamento);
+		
+		result.redirectTo("list");
+	}
+
+	private void salvaOrcamento(Orcamento orcamento) {
 		Configuracoes cfg = cfgRepo.buscaPorId(1l);
 		
 		if(orcamento.getAgencia().getId()==null)
@@ -138,8 +144,6 @@ public class OrcamentosController {
 			
 			orcs.atualiza(orcamento);
 		}
-		
-		result.redirectTo("list");
 	}
 	
 	@Get
@@ -235,7 +239,7 @@ public class OrcamentosController {
 			params.put("IMAGEM"+cont.toString(), nomeAqruivo);
 		}
 		
-		params.put("CAMINHO_IMAGENS", "/home/eduardo/imgs/orcamento/"+orcamento.getId()+"/");
+		params.put("CAMINHO_IMAGENS", "/opt/tomcat/temp/imgs/orcamento/"+orcamento.getId()+"/");
 		
 		return params;
 	}
@@ -243,6 +247,7 @@ public class OrcamentosController {
 	@Post
 	@Transactional
 	public void adicionaImagem(Orcamento orcamento){
+		salvaOrcamento(orcamento);
 		result.include("orcamento",orcamento);
 	}
 		
@@ -259,7 +264,7 @@ public class OrcamentosController {
 		
 		List<String> imagensList = new ArrayList<String>();
 		
-		File folder = new File("/home/eduardo/imgs/orcamento/" + orcamento.getId());
+		File folder = new File("/opt/tomcat/temp/imgs/orcamento/" + orcamento.getId());
 		
 		if(folder.exists()){
 			for(File file : folder.listFiles()){
@@ -275,7 +280,7 @@ public class OrcamentosController {
 	@Path("/orcamentos/imagens/{orcamento.id}/{nomeArquivo}")
 	public Download imagem(Orcamento orcamento,String nomeArquivo) throws FileNotFoundException {
 		
-		File file = new File("/home/eduardo/imgs/orcamento/" + orcamento.getId(),nomeArquivo);
+		File file = new File("/opt/tomcat/temp/imgs/orcamento/" + orcamento.getId(),nomeArquivo);
 	    String contentType = "image/x-png, image/gif, image/jpeg";
 	    String filename = file.getName();
 	    
@@ -287,7 +292,7 @@ public class OrcamentosController {
 	
 	private void salva(UploadedFile imagem, Orcamento orcamento) {
 		
-		File folder = new File("/home/eduardo/imgs/orcamento/"+orcamento.getId());
+		File folder = new File("/opt/tomcat/temp/imgs/orcamento/"+orcamento.getId());
 		
 		if(!folder.exists())
 			folder.mkdirs();
