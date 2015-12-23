@@ -207,7 +207,7 @@
 								
 								<div class="row">
 									<div class="col-md-4">
-										<input value="Salvar" type="submit" class="btn btn-success"	/>
+										<input value="Salvar" type="button" class="btn btn-success" onClick="this.form.submit();"	/>
 										<input type="button" value="Voltar" class="btn btn-danger" onClick="window.location.href='<c:url value='/orcamentos/list'/>'" />
 
 									</div>
@@ -253,6 +253,12 @@
   	$('[data-behaviour~=data]').setMask('date');
   	$('[data-behaviour~=valor]').setMask('decimal');
   	$('[data-behaviour~=integer]').setMask('integer');
+  	$("#tipo").trigger("change");
+  	$("#quant").trigger("blur");
+  	$("#bv").trigger("blur");
+  	$("#ac").trigger("blur");
+  	$("#dc").trigger("blur");
+  	$("#nf").trigger("change");
   	
   	$("#agencia-select").borioSelect({
      selecao : {param1 :"nome"},
@@ -448,6 +454,10 @@
   function calculaDiarias(){
 	 var valor = $("#val-uni").val();
 	 var quantidade = $("#quant").val();
+	 valor = valor.replace(".","");
+	 valor = valor.replace(",",".");
+	 valor = parseFloat(valor);
+	 
 	 var total = valor * quantidade;
 	 $("#tot-dir").val(total);
   }

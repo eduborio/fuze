@@ -73,6 +73,11 @@ public class OrcamentosController {
 		result.include("orcamento",orcamento);
 	}
 	
+	@Path("/orcamentos/novo.json.jsp")
+	public void novoJsonBugDropZone(Long id){
+		result.nothing();
+	}
+	
 	@Path("/orcamentos/{id}")
 	public void edit(Long id){
 		Orcamento o = orcs.buscaPorId(id);
