@@ -7,9 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -99,7 +96,7 @@ public class OrcamentosController {
 		Orcamento o = orcs.buscaPorId(id);
 		Orcamento orc = new OrcamentoBuilder(o).build();
 		salvaOrcamento(orc);
-		copia(o);
+		copia(o,orc.getId());
 		
 		result.include("sucesso","Orcamento Duplicado!!");
 		result.redirectTo("/orcamentos/list");
@@ -388,13 +385,11 @@ public class OrcamentosController {
 	    }
     }
 	
-	private void copia(Orcamento orcamento){
+	private void copia(Orcamento orcamento, Long proximoId){
 		
 		File pastaOrigem  = new File("/opt/tomcat/temp/imgs/orcamento/"+orcamento.getId());
-		Long id = orcamento.getId();
-		id++;
 		
-		File pastaDestino = new File("/opt/tomcat/temp/imgs/orcamento/"+id);
+		File pastaDestino = new File("/opt/tomcat/temp/imgs/orcamento/"+proximoId);
 		
 		if(!pastaDestino.exists())
 			pastaDestino.mkdirs();
@@ -402,7 +397,8 @@ public class OrcamentosController {
 		if(pastaOrigem.isDirectory()){
 			for(File imagem : pastaOrigem.listFiles()){
 				try {
-					IOUtils.copy(new FileInputStream(imagem), new FileOutputStream(pastaDestino));
+					File fileDestino= new File(pastaDestino,imagem.getName());
+					IOUtils.copy(new FileInputStream(imagem), new FileOutputStream(fileDestino));
 				} catch (IOException e) {
 					throw new RuntimeException("Erro ao duplicar Arquivo!!", e);
 				}

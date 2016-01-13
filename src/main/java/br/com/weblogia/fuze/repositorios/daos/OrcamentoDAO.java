@@ -71,4 +71,10 @@ public class OrcamentoDAO extends DAO<Orcamento> implements OrcamentoRepositorio
 		
 		return query.getResultList();
 	}
+
+	@Override
+	public Long buscaProximoId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
