@@ -385,6 +385,10 @@
   		});
   		
   	}); 
+   
+   $("#nf").on("blur",function (){
+	   $(this).trigger("change");
+   });
   	
   	$("#quant").on("blur",function (){
   		calculaDiarias();

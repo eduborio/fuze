@@ -23,8 +23,8 @@
                <appender-ref ref="stdout" />
         </category>
         
-        <category name="br.com.weblogia.nfe">
-               <priority value="DEBUG" />
+        <category name="br.com.weblogia.fuze">
+               <priority value="ERROR" />
                <appender-ref ref="stdout" />
         </category>
  

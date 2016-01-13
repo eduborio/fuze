@@ -1,5 +1,6 @@
 package br.com.weblogia.fuze.repositorios.daos;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.weblogia.fuze.domain.Orcamento;
@@ -31,4 +32,43 @@ public class OrcamentoDAO extends DAO<Orcamento> implements OrcamentoRepositorio
 
         return query.getResultList();
     }
+
+	@Override
+	public void remover(Orcamento orcamento) {
+		entityManager.remove(orcamento);
+	}
+	
+	@Override
+	public List<Orcamento> buscaPor(String agencia, Date dataInicial, Date dataFinal) {
+		
+		StringBuilder hql = new StringBuilder();
+		
+		hql.append(" From Orcamento o ");
+		hql.append(" where 1 = 1  ");
+		
+		
+		if(agencia != null){
+			hql.append(" and ( o.cliente.nome like :nome ");
+			hql.append(" or  o.agencia.nome like :nome) ");
+		}
+		
+		if(dataInicial != null)
+			hql.append(" and o.dataOrcamento between :dataIni and :dataFim ");
+		
+		hql.append(" order by o.dataOrcamento desc");
+		
+		Query query = getEntityManager().createQuery(hql.toString());
+		
+		if(agencia != null)
+			query.setParameter("nome", "%"+ agencia +"%");
+		
+		if(dataInicial != null)
+			query.setParameter("dataIni", dataInicial);
+		
+		if(dataFinal != null){
+			query.setParameter("dataFim", dataFinal);
+		}
+		
+		return query.getResultList();
+	}
 }

@@ -45,7 +45,7 @@ public class GeradorDeRelatorios {
 	}
 	
 	
-	public InputStreamDownload geraPdfParaDownload(String nomeDoArquivoParaDownload) throws JRException {
+	public InputStreamDownload geraPdfParaVisualizacao(String nomeDoArquivoParaDownload) throws JRException {
 		JasperPrint print = preencheRelatorio();
 	    byte[] pdf = JasperExportManager.exportReportToPdf(print);
 	    
@@ -53,6 +53,18 @@ public class GeradorDeRelatorios {
 
 		String contentType = "application/pdf";
 		boolean fazDownload = false;
+		
+		return new InputStreamDownload(docInput, contentType, nomeDoArquivoParaDownload+".pdf", fazDownload, pdf.length);
+	}
+	
+	public InputStreamDownload geraPdfParaDownloadE(String nomeDoArquivoParaDownload) throws JRException {
+		JasperPrint print = preencheRelatorio();
+	    byte[] pdf = JasperExportManager.exportReportToPdf(print);
+	    
+	    ByteArrayInputStream docInput = new ByteArrayInputStream(pdf);
+
+		String contentType = "application/pdf";
+		boolean fazDownload = true;
 		
 		return new InputStreamDownload(docInput, contentType, nomeDoArquivoParaDownload+".pdf", fazDownload, pdf.length);
 	}

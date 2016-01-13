@@ -22,7 +22,7 @@ public class Orcamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Date DataOrcamento;
+	private Date dataOrcamento;
 	
 	@ManyToOne
 	private Agencia agencia;
@@ -103,11 +103,11 @@ public class Orcamento {
 	}
 
 	public Date getDataOrcamento() {
-		return DataOrcamento;
+		return dataOrcamento;
 	}
 
 	public void setDataOrcamento(Date dataOrcamento) {
-		DataOrcamento = dataOrcamento;
+		this.dataOrcamento = dataOrcamento;
 	}
 
 	public Agencia getAgencia() {

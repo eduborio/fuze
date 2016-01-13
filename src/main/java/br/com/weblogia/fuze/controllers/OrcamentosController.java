@@ -17,6 +17,7 @@ import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.mail.EmailException;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -35,8 +36,12 @@ import br.com.caelum.vraptor.validator.Validator;
 import br.com.weblogia.fuze.domain.Configuracoes;
 import br.com.weblogia.fuze.domain.Orcamento;
 import br.com.weblogia.fuze.domain.TipoDiaria;
+import br.com.weblogia.fuze.domain.builder.OrcamentoBuilder;
 import br.com.weblogia.fuze.domain.relatorios.GeradorDeRelatorios;
 import br.com.weblogia.fuze.domain.relatorios.OrcamentoImpressao;
+import br.com.weblogia.fuze.domain.services.emails.Email;
+import br.com.weblogia.fuze.domain.services.emails.EmailOrcamento;
+import br.com.weblogia.fuze.domain.services.emails.EnviadorDeEmail;
 import br.com.weblogia.fuze.repositorios.AgenciaRepositorio;
 import br.com.weblogia.fuze.repositorios.ClienteRepositorio;
 import br.com.weblogia.fuze.repositorios.ConfiguracoesRepositorio;
@@ -84,6 +89,36 @@ public class OrcamentosController {
 		result.include("tipoList",TipoDiaria.values());
 		result.include("orcamento",o);
 		result.of(this).novo();
+	}
+	
+	
+	@Path("/orcamentos/duplicar/{id}")
+	@Transactional
+	public void duplicar(Long id){
+		Orcamento o = orcs.buscaPorId(id);
+		Orcamento orc = new OrcamentoBuilder(o).build();
+		salvaOrcamento(orc);
+		result.include("sucesso","Orcamento Duplicado!!");
+		result.redirectTo("/orcamentos/list");
+	}
+	
+	@Path("/orcamentos/aprovar/{id}")
+	@Transactional
+	public void aprovar(Long id){
+		Orcamento o = orcs.buscaPorId(id);
+		o.setStatus("Aprovado");
+		o.setIcone("fa-check");
+		o.setCor("green");
+		salvaOrcamento(o);
+		result.include("sucesso","Orcamento Aprovado!!");
+		result.redirectTo("/orcamentos/list");
+	}
+	
+	@Transactional
+	public void remover(Long id){
+		Orcamento o = orcs.buscaPorId(id);
+		orcs.remover(o);
+		result.nothing();
 	}
 	
 	@Post
@@ -162,11 +197,47 @@ public class OrcamentosController {
 			InputStreamDownload in =null;
 			
 		    	GeradorDeRelatorios gerador = new GeradorDeRelatorios(parametrosDoPurchaseOrder.get("SUBREPORT_DIR")+"orcamento", parametrosDoPurchaseOrder,(JRBeanCollectionDataSource) parametrosDoPurchaseOrder.get("jrDataSource") );
-				in = gerador.geraPdfParaDownload("orcamento-"+o.getId());
+				in = gerador.geraPdfParaVisualizacao(o.getId().toString()+"-"+o.getAgencia().getNome()+"-"+o.getCliente().getNome());
 					
 			return in;
 
 		}
+	
+	 @Get
+	 @Path("/orcamentos/download/{id}")
+	 public InputStreamDownload download(Long id) throws JRException {
+			
+			Orcamento o = orcs.buscaPorId(id);
+			
+			Map<String, Object> parametrosDoPurchaseOrder = preparaImpressao(o);
+			
+			InputStreamDownload in =null;
+			
+		    	GeradorDeRelatorios gerador = new GeradorDeRelatorios(parametrosDoPurchaseOrder.get("SUBREPORT_DIR")+"orcamento", parametrosDoPurchaseOrder,(JRBeanCollectionDataSource) parametrosDoPurchaseOrder.get("jrDataSource") );
+				in = gerador.geraPdfParaDownloadE(o.getId().toString()+"-"+o.getAgencia().getNome()+"-"+o.getCliente().getNome());
+					
+			return in;
+
+		}
+	 
+	  @Path("/orcamentos/selecionaEmail/{id}")
+		public void selecionaEmail(Long id){
+			Orcamento o = orcs.buscaPorId(id);
+			result.include("orcamento",o);
+	 }
+	 
+	 @Post
+	 public void enviaEmail(Long id,String emails, String assunto, String corpo) throws JRException, EmailException{
+		 Orcamento orc = orcs.buscaPorId(id);
+		 Map<String, Object> parametrosDoPurchaseOrder = preparaImpressao(orc);
+		 GeradorDeRelatorios gerador = new GeradorDeRelatorios(parametrosDoPurchaseOrder.get("SUBREPORT_DIR")+"orcamento", parametrosDoPurchaseOrder,(JRBeanCollectionDataSource) parametrosDoPurchaseOrder.get("jrDataSource") );
+		 byte[] pdf = gerador.gerarByteArrayDePdf();
+		 
+		 Email emailOrcamento = new EmailOrcamento().build(emails,orc, pdf);
+		 new EnviadorDeEmail(emailOrcamento).enviaSemThread();
+		 result.include("sucesso","Email enviado com sucesso!");
+		 result.redirectTo("/orcamentos/list");
+	 }
 	
 	@Get
 	@Path("/orcamentos/listarClientes.json")
@@ -310,5 +381,21 @@ public class OrcamentosController {
 	      throw new RuntimeException("Erro ao copiar imagem", e);
 	    }
     } 
+	
+	@Get
+	@Path("/orcamentos/pesquisar")
+	public void pesquisar(String agencia,Long numero,Date dataInicial,Date dataFinal) {
+		
+		List<Orcamento> orcList = new ArrayList<Orcamento>();
+		
+		if(numero == null)
+		{
+		   result.include("orcamentoList",orcs.buscaPor(agencia,dataInicial,dataFinal) );
+		}else {
+			orcList.add(orcs.buscaPorId(numero));
+			result.include("orcamentoList",orcList);
+		}
+		result.of(this).list(1);
+	}
 	
 }

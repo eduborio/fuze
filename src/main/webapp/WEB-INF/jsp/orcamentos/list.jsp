@@ -24,6 +24,53 @@
 						Novo
 					</a>
 				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-10">
+				<form action="<c:url value='/orcamentos/pesquisar'/>">
+					<div class="row">
+				    	<div class="col-md-2">
+			         		<input type="text" placeholder="Numero" class="form-control" name="numero">
+			         	</div>
+				    </div>
+				    
+				    <div class="row">
+				    	<div class="col-md-4">
+				   			<input id="cli-nome" type="text"  placeholder="Agencia/Cliente" name="agencia" class="form-control">
+				   		</div>
+				    </div>
+				    <!-- 
+				    <div class="row">
+				    	<div class="col-md-4">
+				  	 	    <label>Cliente</label>
+				   			<input id="cli-nome" type="text" name="cliente" class="form-control">
+				   		</div>
+				    </div>
+				     -->
+				    
+				    <div class="row">
+				       <div class="col-md-2">
+				   			<input id="data-ini" type="text" placeholder="Data Inicial" class="form-control" name="dataInicial">
+				   		</div>
+				   		<div class="col-md-2">
+				   			<input id="data-fim" type="text" placeholder="Data Final" class="form-control" name="dataFinal">
+				   		</div>
+				   		<div class="col-md-1">	
+				   			<label>&nbsp;</label>
+							<button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
+						</div>	
+				   	</div>
+				   	<br>
+				   	<!-- 
+					<div class="row">
+						<div class="col-md-1">
+							<input type="button" class="btn btn-inverse" value="Limpar Filtro" onClick="window.location.href='<c:url value='/orcamentos/list'/>'">
+						</div>
+					</div>	
+				   	 -->
+				</form>
+				</div>
 			</div>		
 					
 			<jsp:include page="../_fragmentos/portletLista.jsp"><jsp:param name="iconClass" value="fa fa-tasks"/><jsp:param name="titulo" value="Orçamentos"/></jsp:include>
@@ -64,7 +111,10 @@
  	 										</button>
 											<ul class="dropdown-menu pull-right" role="menu">
 											   <li><a tabindex="-1" target="_blank" href="<c:url value='/orcamentos/imprimir/${orcamento.id}'/>">Imprimir</a></li>
+											   <li><a tabindex="-1" target="_blank" href="<c:url value='/orcamentos/download/${orcamento.id}'/>">Download</a></li>
+											   <li><a tabindex="-1" href="<c:url value='/orcamentos/duplicar/${orcamento.id}'/>">Duplicar</a></li>
 											   <li><a tabindex="-1" href="<c:url value='/orcamentos/selecionaEmail/${orcamento.id}'/>">Email</a></li>
+											   <li><a tabindex="-1" href="<c:url value='/orcamentos/aprovar/${orcamento.id}'/>">Aprovar</a></li>
 										   </ul>
 										</div>
 									</td>
@@ -89,6 +139,14 @@
 			 var pagina = "${pagina}"
 			 CriarPaginacao(registros,"/orcamentos/list",pagina);	
 		});
+		
+		 function remover(id){
+			 if (confirm('Confirma exclusão deste Orçamento?')){	
+			 	  $.get('remover?id=' + id, function(){
+					   $('#orcamento-'+id).fadeOut('slow');
+			   	  });
+			 }
+		  }
 		</script>
 	</content> 
 </body>
