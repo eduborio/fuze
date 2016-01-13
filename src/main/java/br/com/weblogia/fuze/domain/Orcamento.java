@@ -309,4 +309,25 @@ public class Orcamento {
 	public void setDesconto(Double desconto) {
 		this.desconto = desconto;
 	}
+	
+	public String getNomeSocio(){
+		if(socio==null)
+			return "";
+		
+		return this.socio.getNome();
+	}
+	
+	public String getNomeAgencia(){
+		if(agencia==null)
+			return "";
+		
+		return this.agencia.getNome();
+	}
+	
+	public String getNomeCliente(){
+		if(cliente==null)
+			return "";
+		
+		return this.cliente.getNome();
+	}
 }

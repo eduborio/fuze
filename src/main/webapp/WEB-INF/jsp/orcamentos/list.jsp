@@ -86,6 +86,7 @@
 								<th>Icon</th>
 								<th>Ações</th>
 								<th>Excluir</th>
+								<th>Responsável</th>
 							</tr>
 
 						</thead>
@@ -93,8 +94,8 @@
 							<c:forEach var="orcamento" items="${orcamentoList}">
 								<tr id="orcamento-${orcamento.id}">
 									<td>${orcamento.id}</td>
-									<td><a href="<c:url value='/orcamentos/${orcamento.id}'/>" title="title">${orcamento.agencia.nome}</a></td>
-									<td><a href="<c:url value='/orcamentos/${orcamento.id}'/>" title="title">${orcamento.cliente.nome}</a></td>
+									<td><a href="<c:url value='/orcamentos/${orcamento.id}'/>" title="title">${orcamento.nomeAgencia}</a></td>
+									<td><a href="<c:url value='/orcamentos/${orcamento.id}'/>" title="title">${orcamento.nomeCliente}</a></td>
 									<td><a href="<c:url value='/orcamentos/${orcamento.id}'/>" title="title">${orcamento.job}</a></td>
 									<td><a href="<c:url value='/orcamentos/${orcamento.id}'/>" title="title"><fmt:formatNumber value="${orcamento.valor}" pattern="#,##0.00" /></a></td>
 									<td>${orcamento.status}</td>
@@ -124,6 +125,7 @@
 											<i class="fa fa-times red bigger-120"></i>
 										</a> 
 									</td>
+									<td><a href="<c:url value='/orcamentos/${orcamento.id}'/>" title="title">${orcamento.nomeSocio}</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

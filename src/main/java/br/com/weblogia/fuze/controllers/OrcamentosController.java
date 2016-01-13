@@ -3,9 +3,13 @@ package br.com.weblogia.fuze.controllers;
 import static br.com.caelum.vraptor.view.Results.json;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,8 +35,6 @@ import br.com.caelum.vraptor.observer.download.Download;
 import br.com.caelum.vraptor.observer.download.FileDownload;
 import br.com.caelum.vraptor.observer.download.InputStreamDownload;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
-import br.com.caelum.vraptor.validator.SimpleMessage;
-import br.com.caelum.vraptor.validator.Validator;
 import br.com.weblogia.fuze.domain.Configuracoes;
 import br.com.weblogia.fuze.domain.Orcamento;
 import br.com.weblogia.fuze.domain.TipoDiaria;
@@ -60,7 +62,6 @@ public class OrcamentosController {
 	private @Inject  ClienteRepositorio clientes;
 	private @Inject  OrcamentoRepositorio orcs;
 	private @Inject  Result result;
-	private @Inject  Validator validator;
 	private @Inject  ConfiguracoesRepositorio cfgRepo;
 	private @Inject  ServletContext context;
 	
@@ -98,6 +99,8 @@ public class OrcamentosController {
 		Orcamento o = orcs.buscaPorId(id);
 		Orcamento orc = new OrcamentoBuilder(o).build();
 		salvaOrcamento(orc);
+		copia(o);
+		
 		result.include("sucesso","Orcamento Duplicado!!");
 		result.redirectTo("/orcamentos/list");
 	}
@@ -148,8 +151,11 @@ public class OrcamentosController {
 		if(orcamento.getCliente().getId()==null)
 			orcamento.setCliente(null);
 		
-		validator.addIf(orcamento.getTipo()==null,new SimpleMessage("orcamento","Campo Tipo de diária obrigatório!!"));
-		validator.addIf(orcamento.getDescricao()==null,new SimpleMessage("orcamento","Campo pedido obrigatório!!"));
+		if(orcamento.getTipo()==null)
+			orcamento.setTipo(TipoDiaria.SP);
+		
+		//validator.addIf(orcamento.getTipo()==null,new SimpleMessage("orcamento","Campo Tipo de diária obrigatório!!"));
+		//validator.addIf(orcamento.getDescricao()==null,new SimpleMessage("orcamento","Campo pedido obrigatório!!"));
 		
 		
 		if(orcamento.getId()==null){
@@ -380,7 +386,31 @@ public class OrcamentosController {
 	    } catch (IOException e) {
 	      throw new RuntimeException("Erro ao copiar imagem", e);
 	    }
-    } 
+    }
+	
+	private void copia(Orcamento orcamento){
+		
+		File pastaOrigem  = new File("/opt/tomcat/temp/imgs/orcamento/"+orcamento.getId());
+		Long id = orcamento.getId();
+		id++;
+		
+		File pastaDestino = new File("/opt/tomcat/temp/imgs/orcamento/"+id);
+		
+		if(!pastaDestino.exists())
+			pastaDestino.mkdirs();
+		
+		if(pastaOrigem.isDirectory()){
+			for(File imagem : pastaOrigem.listFiles()){
+				try {
+					IOUtils.copy(new FileInputStream(imagem), new FileOutputStream(pastaDestino));
+				} catch (IOException e) {
+					throw new RuntimeException("Erro ao duplicar Arquivo!!", e);
+				}
+			}
+			
+		}
+		
+	}
 	
 	@Get
 	@Path("/orcamentos/pesquisar")
