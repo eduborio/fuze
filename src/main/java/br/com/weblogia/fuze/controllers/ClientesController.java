@@ -68,6 +68,13 @@ public class ClientesController {
 		result.of(this).novo();
 	}
 	
+	@Transactional
+	public void remover(Long id){
+		Cliente cli = clientes.buscaPorId(id);
+		clientes.remover(cli);
+		result.nothing();
+	}
+	
 	
 	
 

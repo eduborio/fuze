@@ -28,4 +28,9 @@ public class ContatoDAO extends DAO<Contato> implements ContatoRepositorio{
 
         return query.getResultList();
     }
+
+	@Override
+	public void remover(Contato contato) {
+		entityManager.remove(contato);
+	}
 }

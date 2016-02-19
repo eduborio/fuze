@@ -9,5 +9,6 @@ public interface ClienteRepositorio{
     Long buscaTotalDeRegistrosDaLista();
     void salva(Cliente cliente);
     void atualiza(Cliente cliente);
+    void remover(Cliente cliente);
     List<Cliente> buscaClientePorNome(String nome);
 }

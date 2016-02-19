@@ -10,7 +10,7 @@
 	<link href="<c:url value='/resources/canvas-theme/css/font-awesome.min.css'/>" rel="stylesheet" />
     <link href="<c:url value='/resources/canvas-theme/css/bootstrap.min.css'/>"    rel="stylesheet" />
     <link href="<c:url value='/resources/canvas-theme/js/libs/css/ui-lightness/jquery-ui-1.9.2.custom.min.css'/>"    rel="stylesheet" />
-    <link href="<c:url value='/resources/canvas-theme/css/App.css'/>"    rel="stylesheet" />
+    <link href="<c:url value='/resources/canvas-theme/css/App-1.0.0.css'/>"    rel="stylesheet" />
 	<link href="<c:url value='/resources/canvas-theme/css/Login.css'/>"    rel="stylesheet" />
 
 </head>

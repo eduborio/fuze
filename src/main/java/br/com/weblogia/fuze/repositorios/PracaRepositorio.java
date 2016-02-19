@@ -9,5 +9,6 @@ public interface PracaRepositorio{
     Long buscaTotalDeRegistrosDaLista();
     void salva(Praca praca);
     void atualiza(Praca praca);
+    void remover(Praca praca);
     List<Praca> buscaPracaPorDescricao(String descricao);
 }

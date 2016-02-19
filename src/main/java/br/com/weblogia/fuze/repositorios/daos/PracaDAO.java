@@ -32,4 +32,10 @@ public class PracaDAO extends DAO<Praca> implements PracaRepositorio{
 
         return query.getResultList();
     }
+
+	@Override
+	public void remover(Praca praca) {
+		entityManager.remove(praca);
+		
+	}
 }

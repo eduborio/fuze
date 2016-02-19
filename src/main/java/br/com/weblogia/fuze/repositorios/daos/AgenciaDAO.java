@@ -32,4 +32,10 @@ public class AgenciaDAO extends DAO<Agencia> implements AgenciaRepositorio{
 
         return query.getResultList();
     }
+
+	@Override
+	public void remover(Agencia agencia) {
+		entityManager.remove(agencia);
+		
+	}
 }

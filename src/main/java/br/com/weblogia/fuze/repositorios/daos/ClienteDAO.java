@@ -31,4 +31,10 @@ public class ClienteDAO extends DAO<Cliente> implements ClienteRepositorio{
 
         return query.getResultList();
     }
+
+	@Override
+	public void remover(Cliente cliente) {
+		entityManager.remove(cliente);
+		
+	}
 }

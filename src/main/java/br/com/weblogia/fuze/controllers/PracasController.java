@@ -61,5 +61,14 @@ public class PracasController {
 		serialize();
 		
 	}
+	
+	@Transactional
+	public void remover(Long id){
+		Praca p = pracas.buscaPorId(id);
+		pracas.remover(p);
+		result.nothing();
+	}
+	
+	
 
 }

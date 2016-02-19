@@ -4,6 +4,14 @@
 <html>
 <head>
 <title>Orçamentos</title>
+<style type="text/css">
+.btn-overlay {
+    position:absolute;
+    top: 0px;
+}
+
+</style>
+
 </head>
 <body>
 	<div id="content">
@@ -118,7 +126,7 @@
 									<div class="col-md-3"> 
 										<label>Tipo da Diária</label>
 										<select id="tipo" class="form-control" name="orcamento.tipo">
-											<option>Selecione</option>
+											<option value="">Selecione</option>
 											<c:forEach items="${tipoList}" var="tipo">
 												<option value="${tipo}" <c:if test="${orcamento.tipo==tipo}">selected="selected"</c:if>>${tipo}</option>
 											</c:forEach>
@@ -218,17 +226,17 @@
 				<jsp:include page="../_fragmentos/portlet.jsp"><jsp:param name="iconClass" value="fa fa-tasks"/></jsp:include>
 				
 				<div class="row">
-					<div class="col-md-12">
 					<h4 class="heading">Imagens</h4>
-						<div class="ui-lightbox-gallery">
-							<c:forEach var="img" items="${orcamento.imgs}">
-								<!--  <a target="_blank" href="<c:url value='/orcamentos/imagens/${orcamento.id}/${img}'/>">${img}</a>-->
+					<div class="ui-lightbox-gallery">
+						<c:forEach var="img" items="${orcamento.imgs}" varStatus="loop">
+							<div id="img-${loop.index}" class="col-md-1"> 
 								<a class="" target="_blank" href="<c:url value='/orcamentos/imagens/${orcamento.id}/${img}'/>" title="${img}">
 									<img src="<c:url value='/orcamentos/imagens/${orcamento.id}/${img}'/>" width="125" alt="${img}">
-								</a>	
+								</a>
+								<button class="btn btn-danger smaller-50 btn-overlay" onclick="removerImagem(${orcamento.id},'${img}',${loop.index}); return false;"><i class="fa fa-times"></i></button>
+							</div>
 							</c:forEach>
 						</div>
-					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-2">
@@ -253,12 +261,7 @@
   	$('[data-behaviour~=data]').setMask('date');
   	$('[data-behaviour~=valor]').setMask('decimal');
   	$('[data-behaviour~=integer]').setMask('integer');
-  	$("#tipo").trigger("change");
-  	$("#quant").trigger("blur");
-  	$("#bv").trigger("blur");
-  	$("#ac").trigger("blur");
-  	$("#dc").trigger("blur");
-  	$("#nf").trigger("change");
+  	
   	
   	$("#agencia-select").borioSelect({
      selecao : {param1 :"nome"},
@@ -426,6 +429,13 @@
   		calculaTotalGeral()
   	});*/
   	
+  	$("#tipo").trigger("change");
+  	$("#quant").trigger("blur");
+  	$("#bv").trigger("blur");
+  	$("#ac").trigger("blur");
+  	$("#dc").trigger("blur");
+  	$("#nf").trigger("change");
+  	
  });
   
   function calculaTotalGeral(){
@@ -532,6 +542,15 @@
 		x = x.toFixed(casasDecimais).toString().replace(".",",");
 	    return x.replace(/\B(?=(\d{casasDecimais})+(?!\d))/g, ".");
 	}
+  
+  function removerImagem(id,fileName,index){
+		if (confirm('Confirma exclusão?')){
+		   $.get('removerImagem?id=' + id+'&fileName='+fileName, function(){
+			   console.log(fileName);
+			   $('#img-'+index).fadeOut('slow');
+		   });
+		}
+	   }
   
   
   

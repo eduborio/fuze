@@ -139,7 +139,7 @@
 	<script src="<c:url value='/resources/canvas-theme/js/libs/jquery-ui-1.9.2.custom.min.js'/>"></script>
 	<script src="<c:url value='/resources/canvas-theme/js/libs/bootstrap.min.js'/>"></script>
 	<script src="<c:url value='/resources/canvas-theme/js/App.js'/>"></script>
-	<script src="<c:url value='/resources/canvas-theme/js/jborio.js'/>"></script>
+	<script src="<c:url value='/resources/canvas-theme/js/jborio-1.0.0.js'/>"></script>
 	<script src="<c:url value='/resources/js/jquery.meiomask.1.1.14.js'/>"></script>
 	<decorator:getProperty property="page.local_script"></decorator:getProperty>
 </body>

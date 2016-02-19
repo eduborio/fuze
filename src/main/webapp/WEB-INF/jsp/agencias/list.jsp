@@ -61,6 +61,14 @@
 			 var pagina = "${pagina}"
 			 CriarPaginacao(registros,"/agencias/list",pagina);	
 		});
+		
+		 function remover(id){
+			 if (confirm('Confirma exclusão desta Agencia?')){	
+			 	  $.get('remover?id=' + id, function(){
+					   $('#agencia-'+id).fadeOut('slow');
+			   	  });
+			 }
+		  }
 		</script>
 	</content> 
 </body>

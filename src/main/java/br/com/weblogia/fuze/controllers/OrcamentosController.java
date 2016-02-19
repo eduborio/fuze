@@ -32,6 +32,8 @@ import br.com.caelum.vraptor.observer.download.Download;
 import br.com.caelum.vraptor.observer.download.FileDownload;
 import br.com.caelum.vraptor.observer.download.InputStreamDownload;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
+import br.com.caelum.vraptor.validator.SimpleMessage;
+import br.com.caelum.vraptor.validator.Validator;
 import br.com.weblogia.fuze.domain.Configuracoes;
 import br.com.weblogia.fuze.domain.Orcamento;
 import br.com.weblogia.fuze.domain.TipoDiaria;
@@ -61,6 +63,7 @@ public class OrcamentosController {
 	private @Inject  Result result;
 	private @Inject  ConfiguracoesRepositorio cfgRepo;
 	private @Inject  ServletContext context;
+	private @Inject  Validator validator;
 	
 	public void list(int pagina){
 		result.include("registros",orcs.buscaTotalDeRegistrosDaLista());
@@ -131,62 +134,87 @@ public class OrcamentosController {
 	}
 
 	private void salvaOrcamento(Orcamento orcamento) {
-		Configuracoes cfg = cfgRepo.buscaPorId(1l);
 		
-		if(orcamento.getAgencia().getId()==null)
-			orcamento.setAgencia(null);
+		validator.addIf(orcamento.getDescricao()==null,new SimpleMessage("Pedido não informado, verifique!!","validação"));
+		validator.addIf(orcamento.getTipo()==null,new SimpleMessage("Tipo da Diaria não informado!","validação"));
+		//validator.addIf(orcamento.getTipo().equals("Selecione"),new SimpleMessage("Tipo da Diaria não informado!","erro"));
 		
-		if(orcamento.getPraca().getId()==null)
-			orcamento.setPraca(null);
-		
-		if(orcamento.getContato().getId()==null)
-			orcamento.setContato(null);
-		
-		if(orcamento.getSocio().getId()==null)
-			orcamento.setSocio(null);
-		
-		if(orcamento.getCliente().getId()==null)
-			orcamento.setCliente(null);
-		
-		if(orcamento.getTipo()==null)
-			orcamento.setTipo(TipoDiaria.SP);
-		
-		//validator.addIf(orcamento.getTipo()==null,new SimpleMessage("orcamento","Campo Tipo de diária obrigatório!!"));
-		//validator.addIf(orcamento.getDescricao()==null,new SimpleMessage("orcamento","Campo pedido obrigatório!!"));
-		
-		
-		if(orcamento.getId()==null){
-			orcamento.setStatus("Rascunho");
-			orcamento.setIcone("fa-edit");
-			orcamento.setCor("grey");
-			
-			if(orcamento.getTipo().equals(TipoDiaria.CWB))
-				orcamento.setValorDiaria(cfg.getDiariaCwb());
-			
-			if(orcamento.getTipo().equals(TipoDiaria.SP))
-				orcamento.setValorDiaria(cfg.getDiariaSp());
-			
-			if(orcamento.getTemNF())
-				orcamento.setNf(cfg.getNf());
-			
-			orcs.salva(orcamento);
-		}else{
-			if(orcamento.getTipo().equals(TipoDiaria.CWB))
-				orcamento.setValorDiaria(cfg.getDiariaCwb());
-			
-			if(orcamento.getTipo().equals(TipoDiaria.SP))
-				orcamento.setValorDiaria(cfg.getDiariaSp());
-			
-			if(orcamento.getTemNF())
-				orcamento.setNf(cfg.getNf());
-			
-			Orcamento managed = orcs.buscaPorId(orcamento.getId());
-			orcamento.setStatus(managed.getStatus());
-			orcamento.setIcone(managed.getIcone());
-			orcamento.setCor(managed.getCor());
-			
-			orcs.atualiza(orcamento);
+		if(validator.hasErrors()){
+			result.include("tipoList",TipoDiaria.values());
+			result.include("orcamento", orcamento);
+			validator.onErrorUsePageOf(this).novo();
 		}
+		
+		try{
+			Configuracoes cfg = cfgRepo.buscaPorId(1l);
+			
+			if(orcamento.getAgencia().getId()==null)
+				orcamento.setAgencia(null);
+			
+			if(orcamento.getPraca().getId()==null)
+				orcamento.setPraca(null);
+			
+			if(orcamento.getContato().getId()==null)
+				orcamento.setContato(null);
+			
+			if(orcamento.getSocio().getId()==null)
+				orcamento.setSocio(null);
+			
+			if(orcamento.getCliente().getId()==null)
+				orcamento.setCliente(null);
+			
+			if(orcamento.getTipo()==null)
+				orcamento.setTipo(TipoDiaria.SP);
+			
+			//validator.addIf(orcamento.getTipo()==null,new SimpleMessage("orcamento","Campo Tipo de diária obrigatório!!"));
+			//validator.addIf(orcamento.getDescricao()==null,new SimpleMessage("orcamento","Campo pedido obrigatório!!"));
+			
+			
+			if(orcamento.getId()==null){
+				orcamento.setStatus("Rascunho");
+				orcamento.setIcone("fa-edit");
+				orcamento.setCor("grey");
+				
+				if(orcamento.getTipo().equals(TipoDiaria.CWB))
+					orcamento.setValorDiaria(cfg.getDiariaCwb());
+				
+				if(orcamento.getTipo().equals(TipoDiaria.SP))
+					orcamento.setValorDiaria(cfg.getDiariaSp());
+				
+				if(orcamento.getTemNF())
+					orcamento.setNf(cfg.getNf());
+				
+				orcs.salva(orcamento);
+			}else{
+				if(orcamento.getTipo().equals(TipoDiaria.CWB))
+					orcamento.setValorDiaria(cfg.getDiariaCwb());
+				
+				if(orcamento.getTipo().equals(TipoDiaria.SP))
+					orcamento.setValorDiaria(cfg.getDiariaSp());
+				
+				if(orcamento.getTemNF())
+					orcamento.setNf(cfg.getNf());
+				
+				Orcamento managed = orcs.buscaPorId(orcamento.getId());
+				orcamento.setStatus(managed.getStatus());
+				orcamento.setIcone(managed.getIcone());
+				orcamento.setCor(managed.getCor());
+				
+				orcs.atualiza(orcamento);
+			}
+		}
+		catch (Exception e) {
+			validator.add( new SimpleMessage("erro",e.getMessage()));
+			e.printStackTrace();
+		}	
+		
+		if(validator.hasErrors()){
+			result.include("tipoList",TipoDiaria.values());
+			result.include("orcamento", orcamento);
+			validator.onErrorUsePageOf(this).novo();
+		}
+		
+		
 	}
 	
 	@Get
@@ -407,6 +435,21 @@ public class OrcamentosController {
 		}
 		
 	}
+	
+	public void removerImagem(Long id, String fileName) {
+		
+		File folder = new File("/opt/tomcat/temp/imgs/orcamento/"+id);
+		
+		File file = new File(folder,fileName);
+	    try {
+	      file.delete();
+	     
+	    } catch (Exception e) {
+	      throw new RuntimeException("Erro ao deletar imagem", e);
+	    }
+	    
+	    result.nothing();
+    }  
 	
 	@Get
 	@Path("/orcamentos/pesquisar")

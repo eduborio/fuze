@@ -61,6 +61,14 @@
 			 var pagina = "${pagina}"
 			 CriarPaginacao(registros,"/clientes/list",pagina);	
 		});
+		
+		 function remover(id){
+			 if (confirm('Confirma exclusão deste Cliente?')){	
+			 	  $.get('remover?id=' + id, function(){
+					   $('#cliente-'+id).fadeOut('slow');
+			   	  });
+			 }
+		  }
 		</script>
 	</content> 
 </body>

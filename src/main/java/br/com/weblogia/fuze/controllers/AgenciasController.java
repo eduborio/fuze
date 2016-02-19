@@ -60,5 +60,12 @@ public class AgenciasController {
 		from(agencia).excludeAll().include("id","nome").
 		serialize();
 	}
+	
+	@Transactional
+	public void remover(Long id){
+		Agencia a = agencias.buscaPorId(id);
+		agencias.remover(a);
+		result.nothing();
+	}
 
 }

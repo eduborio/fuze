@@ -132,12 +132,12 @@ function CriarPaginacao(nRegistros,url,nPaginaAtual){
 	    
 	   	
 	    cHtml = '<li class="active">'+ 
-	    	   '<a href="/nfe' + url + '?pagina=0">' +
+	    	   '<a href="/fuze' + url + '?pagina=0">' +
 	    	   '<i class="fa fa-angle-double-left"></i>' +
 				'</a></li>'	;	
 	    
 	    cHtml += '<li class="active">'+ 
- 	    	    '<a href="/nfe' + url + '?pagina='+nAnterior+'">' +
+ 	    	    '<a href="/fuze' + url + '?pagina='+nAnterior+'">' +
  	    	    	'<i class="fa fa-angle-left"></i>' +
  	    	    	'</a></li>'	;
 		
@@ -155,9 +155,9 @@ function CriarPaginacao(nRegistros,url,nPaginaAtual){
 				for(nCont;nCont < maxPag ;nCont++){
 					
 					if(nCont == nPaginaAtual){
-						cHtml += '<li class="active"><a href="/nfe'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
+						cHtml += '<li class="active"><a href="/fuze'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
 					}else{
-						cHtml += '<li><a href="/nfe'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
+						cHtml += '<li><a href="/fuze'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
 					}	
 				}
 	    	}else{
@@ -174,9 +174,9 @@ function CriarPaginacao(nRegistros,url,nPaginaAtual){
 				for(nCont;nCont < maxPag ;nCont++){
 					
 					if(nCont == nPaginaAtual){
-						cHtml += '<li class="active"><a href="/nfe'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
+						cHtml += '<li class="active"><a href="/fuze'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
 					}else{
-						cHtml += '<li><a href="/nfe'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
+						cHtml += '<li><a href="/fuze'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
 					}	
 				}
 	    		
@@ -189,17 +189,17 @@ function CriarPaginacao(nRegistros,url,nPaginaAtual){
 			for(nCont;nCont < maxPag ;nCont++){
 				
 				if(nCont == nPaginaAtual){
-					cHtml += '<li class="active"><a href="/nfe'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
+					cHtml += '<li class="active"><a href="/fuze'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
 				}else{
-					cHtml += '<li><a href="/nfe'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
+					cHtml += '<li><a href="/fuze'+ url +'?pagina='+(nCont)+'" title="'+(nCont+1)+'">'+(nCont+1)+'</a></li>' ;
 				}	
 			}
         }
 	    
 	    
 		
-		cHtml += '<li class="active"><a href="/nfe' + url + '?pagina='+(nProxima)+'" title="proxima"><i class="fa fa-angle-right"></i></a><li>'
-		      + '<li class="active"><a href="/nfe' + url + '?pagina='+(nPaginas-1)+'" title="Final">'+
+		cHtml += '<li class="active"><a href="/fuze' + url + '?pagina='+(nProxima)+'" title="proxima"><i class="fa fa-angle-right"></i></a><li>'
+		      + '<li class="active"><a href="/fuze' + url + '?pagina='+(nPaginas-1)+'" title="Final">'+
 		      '<i class="fa fa-angle-double-right"></a></li>';
 		
 		

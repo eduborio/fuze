@@ -61,6 +61,14 @@
 			 var pagina = "${pagina}"
 			 CriarPaginacao(registros,"/pracas/list",pagina);	
 		});
+		
+		 function remover(id){
+			 if (confirm('Confirma exclusão desta Praça?')){	
+			 	  $.get('remover?id=' + id, function(){
+					   $('#praca-'+id).fadeOut('slow');
+			   	  });
+			 }
+		  }
 		</script>
 	</content> 
 </body>

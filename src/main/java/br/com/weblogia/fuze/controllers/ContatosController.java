@@ -59,5 +59,12 @@ public class ContatosController {
 		from(contato).excludeAll().include("id","nome").
 		serialize();
 	}
+	
+	@Transactional
+	public void remover(Long id){
+		Contato co = contatos.buscaPorId(id);
+		contatos.remover(co);
+		result.nothing();
+	}
 
 }

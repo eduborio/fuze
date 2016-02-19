@@ -61,6 +61,14 @@
 			 var pagina = "${pagina}"
 			 CriarPaginacao(registros,"/contatos/list",pagina);	
 		});
+		
+		 function remover(id){
+			 if (confirm('Confirma exclusão deste Contato?')){	
+			 	  $.get('remover?id=' + id, function(){
+					   $('#contato-'+id).fadeOut('slow');
+			   	  });
+			 }
+		  }
 		</script>
 	</content> 
 </body>

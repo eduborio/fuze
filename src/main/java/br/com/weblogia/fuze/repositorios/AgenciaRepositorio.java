@@ -9,5 +9,6 @@ public interface AgenciaRepositorio{
     Long buscaTotalDeRegistrosDaLista();
     void salva(Agencia agencia);
     void atualiza(Agencia agencia);
+    void remover(Agencia agencia);
     List<Agencia> buscaAgenciaPorNome(String nome);
 }

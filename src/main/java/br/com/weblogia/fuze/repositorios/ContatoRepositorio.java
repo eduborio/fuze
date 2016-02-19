@@ -9,5 +9,6 @@ public interface ContatoRepositorio{
     Long buscaTotalDeRegistrosDaLista();
     void salva(Contato contato);
     void atualiza(Contato contato);
+    void remover(Contato contato);
     List<Contato> buscaContatoPorNome(String nome);
 }
