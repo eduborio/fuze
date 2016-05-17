@@ -69,8 +69,8 @@ public class DAO<T> {
 
 		Query query = entityManager.createQuery(jp.toString());
 		
-		query.setFirstResult(pagina * 20);
-		query.setMaxResults(20);
+		query.setFirstResult(pagina * 40);
+		query.setMaxResults(40);
 		return query.getResultList();
 	}
 

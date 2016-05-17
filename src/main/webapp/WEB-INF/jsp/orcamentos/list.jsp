@@ -34,12 +34,23 @@
 			         		<input type="text" placeholder="Numero" class="form-control" name="numero">
 			         	</div>
 				    </div>
+				    <div class="row">
+				    	<div class="col-md-2">
+							<label>Status</label>
+							<select name="status" class="form-control">
+								<option value="null"></option>
+								<option value="Aprovado">Aprovado</option>
+								<option value="Rascunho">Rascunho</option>
+							</select>
+				    	</div>
+				    </div>
 				    
 				    <div class="row">
 				    	<div class="col-md-4">
 				   			<input id="cli-nome" type="text"  placeholder="Agencia/Cliente" name="agencia" class="form-control">
 				   		</div>
 				    </div>
+				    
 				    <!-- 
 				    <div class="row">
 				    	<div class="col-md-4">
@@ -78,6 +89,7 @@
 						<thead>
 							<tr>
 								<th>Id</th>
+								<th>Data</th>
 								<th>Agencia</th>
 								<th>Cliente</th>
 								<th>Job</th>
@@ -94,6 +106,7 @@
 							<c:forEach var="orcamento" items="${orcamentoList}">
 								<tr id="orcamento-${orcamento.id}">
 									<td>${orcamento.id}</td>
+									<td><fmt:formatDate value="${orcamento.dataOrcamento}" pattern="dd/MM/yyyy"/></td>
 									<td><a href="<c:url value='/orcamentos/${orcamento.id}'/>" title="title">${orcamento.nomeAgencia}</a></td>
 									<td><a href="<c:url value='/orcamentos/${orcamento.id}'/>" title="title">${orcamento.nomeCliente}</a></td>
 									<td><a href="<c:url value='/orcamentos/${orcamento.id}'/>" title="title">${orcamento.job}</a></td>

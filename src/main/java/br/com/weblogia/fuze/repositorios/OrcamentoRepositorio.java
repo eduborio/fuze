@@ -13,6 +13,6 @@ public interface OrcamentoRepositorio{
     void atualiza(Orcamento orcamento);
     void remover(Orcamento orcamento);
     List<Orcamento> buscaOrcamentoPorDescricao(String descricao);
-	List<Orcamento> buscaPor(String agencia, Date dataInicial, Date dataFinal);
+	List<Orcamento> buscaPor(String agencia, Date dataInicial, Date dataFinal,String status);
 	Long buscaProximoId();
 }

@@ -198,7 +198,7 @@
 								<div class="row">
 									<div class="col-md-3">
 										<label>Total</label>
-									    <input id="total" type="text" class="form-control" data-behaviour="valor" name="orcamento.valor" value="<fmt:formatNumber value='${orcamento.valor}' pattern='#,##0.00'/>" />
+									    <input id="total" type="text" class="form-control" name="orcamento.valor" value="<fmt:formatNumber value='${orcamento.valor}' pattern='#,##0.00'/>" />
 									</div>
 								</div>
 								
@@ -216,6 +216,11 @@
 								<div class="row">
 									<div class="col-md-4">
 										<input value="Salvar" type="button" class="btn btn-success" onClick="this.form.submit();"	/>
+										<c:if test="${orcamento.id != null}">
+											<input type="button" value="Imprimir" class="btn btn-info" onClick="window.location.href='<c:url value='/orcamentos/imprimir/${orcamento.id}'/>'" />
+											<input type="button" value="Download" class="btn btn-info" onClick="window.location.href='<c:url value='/orcamentos/download/${orcamento.id}'/>'" />
+											<input type="button" value="Aprovar" class="btn btn-info" onClick="window.location.href='<c:url value='/orcamentos/aprovar/${orcamento.id}'/>'" />
+										</c:if>
 										<input type="button" value="Voltar" class="btn btn-danger" onClick="window.location.href='<c:url value='/orcamentos/list'/>'" />
 
 									</div>
@@ -355,7 +360,7 @@
   		
   	});
   	
-   $("#nf").on("change",function (){
+   $("#nf").on("change",function ( event, loading){
   		
   		var temNF = $(this).val();
   		$.post("<c:url value='/config/temNF'/>", { temNF: temNF})
@@ -384,7 +389,8 @@
   		  var total = diarias + bv + ac - dc;
   		  percNF = (percNF/100);
   		  $("#tot-nf").val(total * percNF);
-  	  	  calculaTotalGeral()
+  		  console.log(loading)
+  	  	  calculaTotalGeral(loading)
   		});
   		
   	}); 
@@ -428,17 +434,19 @@
   		calculaNF();
   		calculaTotalGeral()
   	});*/
-  	
   	$("#tipo").trigger("change");
   	$("#quant").trigger("blur");
   	$("#bv").trigger("blur");
   	$("#ac").trigger("blur");
+  	$("#total").val("${orcamento.valor}");
   	$("#dc").trigger("blur");
-  	$("#nf").trigger("change");
+  	$("#nf").trigger("change",[true ]);
+  	$("#total").val("${orcamento.valor}");
+  	console.log("On load carrega:" +"${orcamento.valor}" );
   	
  });
   
-  function calculaTotalGeral(){
+  function calculaTotalGeral(loading){
 	  var diarias = parseFloat($("#tot-dir").val());
 	  var bv = parseFloat($("#tot-bv").val());
 	  var ac = parseFloat($("#tot-ac").val());
@@ -461,7 +469,13 @@
 		  nf = 0;
 	  
 	  var total = (diarias + bv + ac - dc) + nf;
-	  $("#total").val(formata(total,2));
+	  var totbd =  parseFloat("${orcamento.valor}");
+	  
+	  if(loading == true){
+		  $("#total").val(formata(totbd,2));
+	  }else{
+		  $("#total").val(formata(total,2));
+	  }
   }
   
   
@@ -508,9 +522,12 @@
 		 if(isNaN(bv))
 			 bv = 0;
 		 
+		 if(isNaN(ac))
+			 ac = 0;
+		 
 		 var total = diarias + bv;
-		 if( ac > 0)
-			 $("#tot-ac").val(total * ac);
+		 
+		 $("#tot-ac").val(total * ac);
 		 
   }
   
@@ -551,6 +568,11 @@
 		   });
 		}
 	   }
+  
+  function getMoney( str )
+  {
+          return parseInt( str.replace(/[\D]+/g,'') );
+  }
   
   
   

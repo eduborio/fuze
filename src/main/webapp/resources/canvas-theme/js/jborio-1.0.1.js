@@ -120,7 +120,7 @@ function CriarPaginacao(nRegistros,url,nPaginaAtual){
 	    nAnterior = nPaginaAtual - 1;
 	    nProxima  = nPaginaAtual + 1;
 	    
-	    var nPaginas = nRegistros / 20;
+	    var nPaginas = nRegistros / 40;
 		nPaginas = Math.ceil(nPaginas);
 	    
 	    if(nAnterior < 0)

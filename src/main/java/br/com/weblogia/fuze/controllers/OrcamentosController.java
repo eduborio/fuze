@@ -129,8 +129,9 @@ public class OrcamentosController {
 	public void salvar(Orcamento orcamento){
 		
 		salvaOrcamento(orcamento);
+		result.include("sucesso","Orçamento Salvo !!!");
 		
-		result.redirectTo("list");
+		result.redirectTo("/orcamentos/"+orcamento.getId());
 	}
 
 	private void salvaOrcamento(Orcamento orcamento) {
@@ -148,23 +149,29 @@ public class OrcamentosController {
 		try{
 			Configuracoes cfg = cfgRepo.buscaPorId(1l);
 			
-			if(orcamento.getAgencia().getId()==null)
-				orcamento.setAgencia(null);
+			if(orcamento.getAgencia()!=null)
+				if(orcamento.getAgencia().getId()==null)
+					orcamento.setAgencia(null);
 			
-			if(orcamento.getPraca().getId()==null)
-				orcamento.setPraca(null);
+			if(orcamento.getPraca()!=null)
+				if(orcamento.getPraca().getId()==null)
+					orcamento.setPraca(null);
 			
-			if(orcamento.getContato().getId()==null)
-				orcamento.setContato(null);
+			if(orcamento.getContato()!=null)
+				if(orcamento.getContato().getId()==null)
+					orcamento.setContato(null);
 			
-			if(orcamento.getSocio().getId()==null)
-				orcamento.setSocio(null);
+			if(orcamento.getSocio()!=null)
+				if(orcamento.getSocio().getId()==null)
+					orcamento.setSocio(null);
 			
-			if(orcamento.getCliente().getId()==null)
-				orcamento.setCliente(null);
+			if(orcamento.getCliente()!=null)
+				if(orcamento.getCliente().getId()==null)
+					orcamento.setCliente(null);
 			
-			if(orcamento.getTipo()==null)
-				orcamento.setTipo(TipoDiaria.SP);
+			if(orcamento.getTipo()!=null)
+				if(orcamento.getTipo()==null)
+					orcamento.setTipo(TipoDiaria.SP);
 			
 			//validator.addIf(orcamento.getTipo()==null,new SimpleMessage("orcamento","Campo Tipo de diária obrigatório!!"));
 			//validator.addIf(orcamento.getDescricao()==null,new SimpleMessage("orcamento","Campo pedido obrigatório!!"));
@@ -453,13 +460,13 @@ public class OrcamentosController {
 	
 	@Get
 	@Path("/orcamentos/pesquisar")
-	public void pesquisar(String agencia,Long numero,Date dataInicial,Date dataFinal) {
+	public void pesquisar(String agencia,Long numero,Date dataInicial,Date dataFinal,String status) {
 		
 		List<Orcamento> orcList = new ArrayList<Orcamento>();
 		
 		if(numero == null)
 		{
-		   result.include("orcamentoList",orcs.buscaPor(agencia,dataInicial,dataFinal) );
+		   result.include("orcamentoList",orcs.buscaPor(agencia,dataInicial,dataFinal,status) );
 		}else {
 			orcList.add(orcs.buscaPorId(numero));
 			result.include("orcamentoList",orcList);

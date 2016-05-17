@@ -39,7 +39,7 @@ public class OrcamentoDAO extends DAO<Orcamento> implements OrcamentoRepositorio
 	}
 	
 	@Override
-	public List<Orcamento> buscaPor(String agencia, Date dataInicial, Date dataFinal) {
+	public List<Orcamento> buscaPor(String agencia, Date dataInicial, Date dataFinal,String status) {
 		
 		StringBuilder hql = new StringBuilder();
 		
@@ -55,6 +55,9 @@ public class OrcamentoDAO extends DAO<Orcamento> implements OrcamentoRepositorio
 		if(dataInicial != null)
 			hql.append(" and o.dataOrcamento between :dataIni and :dataFim ");
 		
+		if(status!=null)
+			hql.append(" and o.status = :status ");
+		
 		hql.append(" order by o.dataOrcamento desc");
 		
 		Query query = getEntityManager().createQuery(hql.toString());
@@ -68,6 +71,9 @@ public class OrcamentoDAO extends DAO<Orcamento> implements OrcamentoRepositorio
 		if(dataFinal != null){
 			query.setParameter("dataFim", dataFinal);
 		}
+		
+		if(status!=null)
+			query.setParameter("status", status);
 		
 		return query.getResultList();
 	}
