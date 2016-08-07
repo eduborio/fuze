@@ -79,7 +79,7 @@ public class Orcamento {
 		List<String> pdfs = new ArrayList<String>(); 
 		
 		if(id!=null){
-			File folder = new File("/opt/tomcat/temp/imgs/orcamento/" + id);
+			File folder = new File("/home/eduardo/imgs/orcamento/" + id);
 			
 			if(folder.exists()){
 				for(File file : folder.listFiles()){

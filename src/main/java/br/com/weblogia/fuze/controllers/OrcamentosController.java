@@ -353,7 +353,7 @@ public class OrcamentosController {
 			params.put("IMAGEM"+cont.toString(), nomeAqruivo);
 		}
 		
-		params.put("CAMINHO_IMAGENS", "/opt/tomcat/temp/imgs/orcamento/"+orcamento.getId()+"/");
+		params.put("CAMINHO_IMAGENS", "/home/eduardo/imgs/orcamento/"+orcamento.getId()+"/");
 		
 		return params;
 	}
@@ -378,7 +378,7 @@ public class OrcamentosController {
 		
 		List<String> imagensList = new ArrayList<String>();
 		
-		File folder = new File("/opt/tomcat/temp/imgs/orcamento/" + orcamento.getId());
+		File folder = new File("/home/eduardo/imgs/orcamento/" + orcamento.getId());
 		
 		if(folder.exists()){
 			for(File file : folder.listFiles()){
@@ -394,7 +394,7 @@ public class OrcamentosController {
 	@Path("/orcamentos/imagens/{orcamento.id}/{nomeArquivo}")
 	public Download imagem(Orcamento orcamento,String nomeArquivo) throws FileNotFoundException {
 		
-		File file = new File("/opt/tomcat/temp/imgs/orcamento/" + orcamento.getId(),nomeArquivo);
+		File file = new File("/home/eduardo/imgs/orcamento/" + orcamento.getId(),nomeArquivo);
 	    String contentType = "image/x-png, image/gif, image/jpeg";
 	    String filename = file.getName();
 	    
@@ -406,7 +406,7 @@ public class OrcamentosController {
 	
 	private void salva(UploadedFile imagem, Orcamento orcamento) {
 		
-		File folder = new File("/opt/tomcat/temp/imgs/orcamento/"+orcamento.getId());
+		File folder = new File("/home/eduardo/imgs/orcamento/"+orcamento.getId());
 		
 		if(!folder.exists())
 			folder.mkdirs();
@@ -422,9 +422,9 @@ public class OrcamentosController {
 	
 	private void copia(Orcamento orcamento, Long proximoId){
 		
-		File pastaOrigem  = new File("/opt/tomcat/temp/imgs/orcamento/"+orcamento.getId());
+		File pastaOrigem  = new File("/home/eduardo/imgs/orcamento/"+orcamento.getId());
 		
-		File pastaDestino = new File("/opt/tomcat/temp/imgs/orcamento/"+proximoId);
+		File pastaDestino = new File("/home/eduardo/imgs/orcamento/"+proximoId);
 		
 		if(!pastaDestino.exists())
 			pastaDestino.mkdirs();
@@ -445,7 +445,7 @@ public class OrcamentosController {
 	
 	public void removerImagem(Long id, String fileName) {
 		
-		File folder = new File("/opt/tomcat/temp/imgs/orcamento/"+id);
+		File folder = new File("/home/eduardo/imgs/orcamento/"+id);
 		
 		File file = new File(folder,fileName);
 	    try {

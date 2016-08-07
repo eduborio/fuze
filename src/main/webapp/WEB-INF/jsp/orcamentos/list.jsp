@@ -38,7 +38,7 @@
 				    	<div class="col-md-2">
 							<label>Status</label>
 							<select name="status" class="form-control">
-								<option value="null"></option>
+								<option></option>
 								<option value="Aprovado">Aprovado</option>
 								<option value="Rascunho">Rascunho</option>
 							</select>
