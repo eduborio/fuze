@@ -28,10 +28,6 @@
 			</h1>	
 	
 			<a href="javascript:;" data-toggle="collapse" data-target=".top-bar-collapse" id="top-bar-toggle" class="navbar-toggle collapsed">
-				<i class="fa fa-cog"></i>
-			</a>
-	
-			<a href="javascript:;" data-toggle="collapse" data-target=".sidebar-collapse" id="sidebar-toggle" class="navbar-toggle collapsed">
 				<i class="fa fa-reorder"></i>
 			</a>
 
@@ -110,13 +106,12 @@
 	
 			 <div id="search">
 				<form>
-					<!-- <input class="form-control input-sm" type="text" name="search" placeholder="Search..." /> -->
-	
-					<!-- <button type="submit" id="search-btn" class="btn"><i class="fa fa-search"></i></button>  -->
 				</form>		
 			</div>  
 		
-			<nav id="sidebar">		
+			<nav id="sidebar">	
+				<ul id="main-nav">			
+				</ul>	
 				
 						
 			</nav> <!-- #sidebar -->
