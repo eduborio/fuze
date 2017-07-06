@@ -41,7 +41,7 @@ public class LoginController {
 			config.setDiariaSp(0);
 		}
 		
-		if(login.equals("admin") && senha.equals("admin")){
+		if(login.equals("admin") && senha.equals("for9$hot")){
 			UserRole role = new UserRole();
 			role.setNome("SuperUsuario");
 			usuario.setLogado(true);
