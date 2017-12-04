@@ -501,7 +501,10 @@
 	 if(isNaN(total))
 		 total = 0;
 	 
-	 if( bv > 0)
+	 if(isNaN(bv))
+		 bv = 0;
+	 
+	 if( bv >= 0)
 		 $("#tot-bv").val(total * bv);
 	 
   }
@@ -550,8 +553,11 @@
 		 if(isNaN(ac))
 			 ac = 0;
 		 
+		 if(isNaN(dc))
+			 dc = 0;
+		 
 		 var total = diarias + bv + ac;
-		 if( dc > 0)
+		 if( dc >= 0)
 			 $("#tot-dc").val(total * dc);
   }
   

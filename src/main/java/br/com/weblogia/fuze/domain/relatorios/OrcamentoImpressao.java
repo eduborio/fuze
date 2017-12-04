@@ -118,7 +118,13 @@ public class OrcamentoImpressao {
 		return o.getEmpresaRodape();
 	}
 	
-	public Boolean getSocioRodape(){
+	public boolean getSocioRodape(){
+		
+		if(o.getSocioRodape() == null){
+			System.out.println("SocioRodape NULL");
+			return false;
+		}
+		
 		return o.getSocioRodape();
 	}
 

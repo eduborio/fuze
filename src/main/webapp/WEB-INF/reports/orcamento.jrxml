@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orcamento" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0abf6e64-c2f8-4085-8a4f-bd4a0f5e6f35">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="624"/>
 	<parameter name="CAMINHO_LOGO" class="java.lang.String"/>
 	<parameter name="IMAGEM1" class="java.lang.String"/>
 	<parameter name="IMAGEM2" class="java.lang.String"/>
@@ -304,51 +304,6 @@ CNPJ: 15.615.506/0001-82
 Rua Theodoro Gbur, 254, casa 17, CEP - 82.600-280
 Bairro: Tingui, Curitiba-PR]]></text>
 			</staticText>
-			<textField>
-				<reportElement uuid="ac9bfd3b-c47b-421b-8838-9ccf6cc95561" x="337" y="689" width="199" height="11">
-					<printWhenExpression><![CDATA[$F{socioRodape}]]></printWhenExpression>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Uni Sans Regular"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{socio_nome}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="ac9bfd3b-c47b-421b-8838-9ccf6cc95561" x="337" y="701" width="199" height="11" forecolor="#666666" backcolor="#FFFFFF">
-					<printWhenExpression><![CDATA[$F{socioRodape}]]></printWhenExpression>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Uni Sans Regular"/>
-				</textElement>
-				<textFieldExpression><![CDATA["CPF: "+$F{socio_cpf}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="ac9bfd3b-c47b-421b-8838-9ccf6cc95561" x="337" y="713" width="199" height="11" forecolor="#666666" backcolor="#FFFFFF">
-					<printWhenExpression><![CDATA[$F{socioRodape}]]></printWhenExpression>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Uni Sans Regular"/>
-				</textElement>
-				<textFieldExpression><![CDATA["RG: "+$F{socio_rg}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="ac9bfd3b-c47b-421b-8838-9ccf6cc95561" x="337" y="725" width="199" height="11">
-					<printWhenExpression><![CDATA[$F{socioRodape}]]></printWhenExpression>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Uni Sans Regular"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{socio_email}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="ac9bfd3b-c47b-421b-8838-9ccf6cc95561" x="337" y="737" width="199" height="11">
-					<printWhenExpression><![CDATA[$F{socioRodape}]]></printWhenExpression>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Uni Sans Regular"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{socio_telefone}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement uuid="7ebf54f2-6ada-47ee-8be7-618a60f1ae08" x="432" y="599" width="29" height="20" forecolor="#666666"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -356,6 +311,51 @@ Bairro: Tingui, Curitiba-PR]]></text>
 				</textElement>
 				<text><![CDATA[R$]]></text>
 			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="340" y="689" width="196" height="12" forecolor="#000000">
+					<printWhenExpression><![CDATA[$F{socioRodape}]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{socio_nome}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="340" y="701" width="196" height="12" forecolor="#666666">
+					<printWhenExpression><![CDATA[$F{socioRodape}]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RG: "+$F{socio_rg}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="340" y="713" width="196" height="12" forecolor="#666666">
+					<printWhenExpression><![CDATA[$F{socioRodape}]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CPF: "+$F{socio_cpf}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="340" y="725" width="196" height="12" forecolor="#000000">
+					<printWhenExpression><![CDATA[$F{socioRodape}]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tel: "+ $F{socio_telefone}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a4175e-66e1-4a14-9dc2-7aa01e78ee40" x="340" y="737" width="196" height="12" forecolor="#000000">
+					<printWhenExpression><![CDATA[$F{socioRodape}]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Uni Sans Regular" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{socio_email}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<detail>
