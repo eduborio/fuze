@@ -60,7 +60,10 @@
 									
 									<div class="col-md-4">
 										<label>Mídias</label>
+										<textarea name="orcmamento.midias" class="form-control" rows="5" cols="1">${orcamento.midias}</textarea>
+										<!-- 
 										<input type="text" name="orcamento.midias" value="${orcamento.midias}" class="form-control"/>
+										 -->
 									</div>
 								</div>
 								
@@ -214,7 +217,7 @@
 								
 								
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<input value="Salvar" type="button" class="btn btn-success" onClick="this.form.submit();"	/>
 										<c:if test="${orcamento.id != null}">
 											<input type="button" value="Imprimir" class="btn btn-info" onClick="window.location.href='<c:url value='/orcamentos/imprimir/${orcamento.id}'/>'" />
