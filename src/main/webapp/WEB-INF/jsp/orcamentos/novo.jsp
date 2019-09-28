@@ -60,7 +60,7 @@
 									
 									<div class="col-md-4">
 										<label>Mídias</label>
-										<textarea name="orcmamento.midias" class="form-control" rows="5" cols="1">${orcamento.midias}</textarea>
+										<textarea name="orcamento.midias" class="form-control" rows="5" cols="1">${orcamento.midias}</textarea>
 										<!-- 
 										<input type="text" name="orcamento.midias" value="${orcamento.midias}" class="form-control"/>
 										 -->

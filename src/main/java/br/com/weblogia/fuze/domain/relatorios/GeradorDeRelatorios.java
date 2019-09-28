@@ -3,11 +3,13 @@ package br.com.weblogia.fuze.domain.relatorios;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
+import java.util.Locale;
 import java.util.Map;
 
 import br.com.caelum.vraptor.observer.download.InputStreamDownload;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -116,6 +118,9 @@ public class GeradorDeRelatorios {
 	}
 
 	private JasperPrint preencheRelatorio() throws JRException {
+		
+		java.util.Locale locale = new Locale( "pt", "BR" );
+		params.put( JRParameter.REPORT_LOCALE, locale );
 		
 		if(this.datasource!= null)
 			 return JasperFillManager.fillReport(nomedoArquivoJasper+".jasper", params, datasource);
